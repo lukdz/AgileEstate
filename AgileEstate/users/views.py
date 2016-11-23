@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.shortcuts import render
@@ -51,8 +50,3 @@ def login_user(request):
         else:
             return render(request, 'profile/login.html', {'error_message': 'Invalid login'})
     return render(request, 'profile/login.html')
-=======
-from django.shortcuts import render
-
-# Create your views here.
->>>>>>> 13d921fcac8bd18407f0333f24464b4a7cccc6b6
