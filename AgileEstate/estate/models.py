@@ -1,17 +1,21 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.core.validators import MinValueValidator
+
+from decimal import *
+
+class Places:
+    countries_map = {"CA" : "Canada", "CH" : "Switzerland", "DE" : "Germany", "FR" : "France", "GB" : "United Kingdom", "HK" : "Hong Kong", "JP" : "Japan", "PL" : "Poland", "US" : "United States of America"}
+    cities_map = {"BER" : "Berlin", "LON": "London", "MTL" : "Montreal", "NYK" : "New York", "PAR" : "Paris", "TOK" : "Tokio", "WDC" : "Washington DC", "WRO" : "Wroclaw", "ZUR" : "Zurich"}
 
 class PropertyModel(models.Model):
-    country = models.TextField()
-    city = models.TextField()
-    surface = models.DecimalField(decimal_places=2)
-    minimal_price = models.DecimalField(decimal_places=2)
+    VIEW_TYPES = [("0", "shit"), ("1", ""), ("2", ""), ("3", ""), ("4", ""), ("5", ""), ("6", ""), ("7", "wonderful"), ("8", ""), ("9", "paradise")]
     
-    def save(self, *args, **kwargs):
-        if self.surface <= 0:
-            raise TypeError("Property surface is less than or equal to zero.")
-        
-        if self.minimal_price <= 0:
-            raise TypeError("Property minimal_price is less than or equal to zero.")
+    country = models.TextField( list(Places.countries_map.items()) )
+    city = models.TextField( list(Places.cities_map.items()) )
+    
+    surface = models.DecimalField( max_digits=1002, decimal_places=2, validators=[ MinValueValidator(0.0) ] )
+    num_rooms = models.PositiveIntegerField( validators=[MinValueValidator(3)] )
+    window_view = models.IntegerField()
 
