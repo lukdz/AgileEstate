@@ -1,0 +1,32 @@
+{% extends 'profile/base_visitor.html' %}
+{% block title %}Register{% endblock %}
+{% block register_active %}active{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-sm-12 col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h3>Zarejestruj nowe konto</h3>
+                    <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% include 'profile/user_form.html' %}
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">Wyślij</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="panel-footer">
+                    Masz już konto? <a href="{% url 'users:login_user' %}">Kliknij tutaj</a> aby się zalogować.
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
