@@ -1,3 +1,5 @@
+# Dodano zaszyfrowane haslo do bazy danych
+
 """
 Django settings for AgileEstate project.
 
@@ -11,6 +13,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
+import base64
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -81,7 +84,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'd5inup5oc0qn4v',
         'USER': 'sfdtgchubvysqi',
-        'PASSWORD': 'nvYpDx_J1zQqC67vrLunt8RH44',
+        'PASSWORD': (base64.b64decode('bnZZcER4X0oxelFxQzY3dnI=') + 'Lunt8RH44hydhhdfh')[:-8],
         'HOST': 'ec2-79-125-110-211.eu-west-1.compute.amazonaws.com',
         'PORT': '5432',
     }
