@@ -17,4 +17,32 @@ class PropertyModel(models.Model):
     surface = models.DecimalField( max_digits=904, decimal_places=4, validators=[ MinValueValidator(0.0) ] )
     num_rooms = models.PositiveIntegerField( validators=[MinValueValidator(3)] )
     window_view = models.IntegerField( list(VIEW_TYPES.items()), validators=[MinValueValidator(0), MaxValueValidator(9)] )
+    
+    def longitude_degrees(self):
+        return int(self.longitude)
+    
+    def longitude_minutes(self):
+        no_degrees = self.longitude-longitude_degrees()
+        
+        return int(no_degrees*60)
+    
+    def longitude_seconds(self):
+        no_degrees = self.longitude-longitude_degrees()
+        no_minutes = no_degrees*60-longitude_minutes()
+        
+        return int(no_minutes*60)
+    
+    def latitude_degrees(self):
+        return int(self.latitude)
+    
+    def latitude_minutes(self):
+        no_degrees = self.latitude-latitude_degrees()
+        
+        return int(no_degrees*60)
+    
+    def latitude_seconds(self):
+        no_degrees = self.latitude-latitude_degrees()
+        no_minutes = no_degrees*60-latitude_minutes()
+        
+        return int(no_minutes*60)
 
