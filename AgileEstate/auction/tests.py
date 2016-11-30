@@ -12,8 +12,17 @@ class BiddingModelTestCase(TestCase):
     def tearDown(self):
         pass
     
+    def test_bid_open_fail_1(self):
+        self.assertTrue( model.is_bid_open( datetime(2000, 7, 8, 9, 10, 11) ) )
+    
+    def test_bid_open_fail_2(self):
+        self.assertFalse( model.is_bid_open( datetime(2003, 7, 8, 9, 10, 11) ) )
+    
+    def test_bid_open_correct(self):
+        self.assertFalse( model.is_bid_open( datetime(2001, 7, 8, 9, 10, 11) ) )
+    
     def test_set_new_actual_price_error_1(self):
-        self.assertRaises( SystemError, model.set_new_actual_price( Decimal(210.00), datetime(2003, 4, 5, 6, 7, 8) ) )
+        self.assertRaises( SystemError, model.set_new_actual_price( Decimal(210.00), datetime(2003, 7, 8, 9, 10, 11) ) )
     
     def test_set_new_actual_price_error_2(self):
         self.assertRaises( AttributeError, model.set_new_actual_price( Decimal(190.00), datetime(2001, 7, 8, 9, 10, 11) ) )
