@@ -1,8 +1,7 @@
-from django.test import TestCase
-
-from .models import PropertyModel
-
 from decimal import *
+
+from django.test import TestCase
+from .models import PropertyModel
 
 class PropertyModelTestCase(TestCase):
     def setUp(self):
@@ -11,4 +10,3 @@ class PropertyModelTestCase(TestCase):
     
     def tearDown(self):
         pass
-    

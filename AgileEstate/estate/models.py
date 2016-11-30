@@ -1,21 +1,19 @@
 from __future__ import unicode_literals
-
-from django.db import models
-from django.core.validators import MinValueValidator
-
 from decimal import *
 
+from django.db import models
+from django.core.validators import MinValueValidator, MaxValueValidator
+
 class Places:
-    countries_map = {"CA" : "Canada", "CH" : "Switzerland", "DE" : "Germany", "FR" : "France", "GB" : "United Kingdom", "HK" : "Hong Kong", "JP" : "Japan", "PL" : "Poland", "US" : "United States of America"}
-    cities_map = {"BER" : "Berlin", "LON": "London", "MTL" : "Montreal", "NYK" : "New York", "PAR" : "Paris", "TOK" : "Tokio", "WDC" : "Washington DC", "WRO" : "Wroclaw", "ZUR" : "Zurich"}
+    COUNTRIES = {"Afghanistan" : "AFG", "Albania" : "ALB", "Algeria" : "DZA", "Canada" : "CAN", "France" : "FRA", "Germany" : "DEU", "Hong Kong" : "HKG", "Japan" : "JPN", "North Korea" : "PRK", "Poland" : "POL", "South Korea" : "KOR", "Switzerland" : "CHE", "United Kingdom" : "GBR", "United States of America" : "USA"}
 
 class PropertyModel(models.Model):
-    VIEW_TYPES = [("0", "shit"), ("1", ""), ("2", ""), ("3", ""), ("4", ""), ("5", ""), ("6", ""), ("7", "wonderful"), ("8", ""), ("9", "paradise")]
+    VIEW_TYPES = {"0" : "shit", "1" : "poor", "2" : "bad", "3" : "good", "4" : "nice", "5" : "great", "6" : "awesome", "7" : "wonderful", "8" : "breath-taking", "9" : "paradise"}
     
-    country = models.TextField( list(Places.countries_map.items()) )
-    city = models.TextField( list(Places.cities_map.items()) )
+    country = models.TextField( list(Places.COUNTRIES.items()) )
+    place = models.TextField()
     
     surface = models.DecimalField( max_digits=1002, decimal_places=2, validators=[ MinValueValidator(0.0) ] )
     num_rooms = models.PositiveIntegerField( validators=[MinValueValidator(3)] )
-    window_view = models.IntegerField()
+    window_view = models.IntegerField( list(VIEW_TYPES.items()), validators=[MinValueValidator(0), MaxValueValidator(9)] )
 
