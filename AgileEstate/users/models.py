@@ -1,18 +1,12 @@
-from __future__ import unicode_literals
-
+from django.contrib.auth.models import Permission, User
 from django.db import models
 
-class CustomUser(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    address = models.CharField(max_length=150)
-    gender = models.CharField(max_length = 10)
-    profile_picture = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100)
 
-    @receiver(post_save, sender=User)
-    def create_custom_user(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
+class UserProfile(models.Model):
+    user = models.ForeignKey(User, unique=True)
+    location = models.CharField(max_length=140)
+    gender = models.CharField(max_length=140)
+    profile_picture = models.ImageField(upload_to='thumbpath', blank=True)
 
-    @receiver(post_save, sender=User)
-    def save_custom_user(sender, instance, **kwargs):
-    instance.profile.save()
+    def __unicode__(self):
+        return u'Profile of user: %s' % self.user.username

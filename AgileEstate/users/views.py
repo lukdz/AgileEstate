@@ -50,3 +50,5 @@ def login_user(request):
         else:
             return render(request, 'profile/login.html', {'error_message': 'Invalid login'})
     return render(request, 'profile/login.html')
+    
+from django.shortcuts import render
