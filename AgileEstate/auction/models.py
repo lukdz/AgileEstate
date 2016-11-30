@@ -23,7 +23,7 @@ class BiddingModel(models.Model):
         if new_price <= self.actual_price:
             raise AttributeError("New price is less than actual price.")
     
-        self.self.actual_price = new_price
+        self.actual_price = new_price
     
     def is_bid_open(self, time):
-        return start_time <= time <= end_time
+        return self.start_time <= time <= self.end_time
