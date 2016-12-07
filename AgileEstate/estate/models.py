@@ -14,9 +14,9 @@ class PropertyModel(models.Model):
     longitude = models.FloatField( default=0.0, validators=[ MinValueValidator(-180.0), MaxValueValidator(-180.0) ] )
     latitude = models.FloatField( default=0.0, validators=[ MinValueValidator(-90.0), MaxValueValidator(90.0) ] )
     
-    surface = models.DecimalField( max_digits=904, decimal_places=4, validators=[ MinValueValidator(0.0) ] )
+    surface = models.DecimalField( max_digits=902, decimal_places=4, validators=[ MinValueValidator(0.0) ] )
     num_rooms = models.PositiveIntegerField( validators=[MinValueValidator(3)] )
-    window_view = models.IntegerField( list(VIEW_TYPES.items()), validators=[MinValueValidator(0), MaxValueValidator(9)] )
+    window_view = models.IntegerField( list(VIEW_TYPES.items()), default=5, validators=[MinValueValidator(0), MaxValueValidator(9)] )
     
     def longitude_degrees(self):
         return int(self.longitude)
