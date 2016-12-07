@@ -7,6 +7,7 @@ from .forms import UserForm
 def index(request):
     if not request.user.is_authenticated():
         return render(request, 'profile/base.html')
+    return render(request, 'profile/index.html')
 
 
 def register(request):
@@ -21,7 +22,7 @@ def register(request):
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return render(request, 'profile/index.html')
+                return render(request, 'profile/profile.html')
     context = {
         "form": form,
     }
@@ -40,15 +41,15 @@ def login_user(request):
     if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
-        user = authenticate(username=username, password=password)
+        user = authenticate(username=username, passwsord=password)
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return render(request, 'profile/index.html')
+                return render(request, 'profile/profile.html')
             else:
                 return render(request, 'profile/login.html', {'error_message': 'Your account has been disabled'})
         else:
             return render(request, 'profile/login.html', {'error_message': 'Invalid login'})
     return render(request, 'profile/login.html')
-    
+
 from django.shortcuts import render
