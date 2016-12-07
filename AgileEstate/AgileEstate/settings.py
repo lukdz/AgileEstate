@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'g6zkhlltk6-ffjl8xddb!tz8(y$$dgq=&phevu!dh(d3db$bf!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -83,13 +83,6 @@ WSGI_APPLICATION = 'AgileEstate.wsgi.application'
 if DEBUG:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
-    }
-else:
-    DATABASES = {
-        'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'd5inup5oc0qn4v',
             'USER': 'sfdtgchubvysqi',
@@ -98,6 +91,8 @@ else:
             'PORT': '5432',
         }
     }
+else:
+    raise SystemExit("NO DATABASE")
 
 
 # Password validation
