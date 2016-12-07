@@ -22,13 +22,13 @@ class PropertyModel(models.Model):
         return int(self.longitude)
     
     def longitude_minutes(self):
-        no_degrees = self.longitude-longitude_degrees()
+        no_degrees = self.longitude-self.longitude_degrees()
         
         return int(no_degrees*60)
     
     def longitude_seconds(self):
-        no_degrees = self.longitude-longitude_degrees()
-        no_minutes = no_degrees*60-longitude_minutes()
+        no_degrees = self.longitude-self.longitude_degrees()
+        no_minutes = no_degrees*60-self.longitude_minutes()
         
         return int(no_minutes*60)
     
@@ -36,13 +36,13 @@ class PropertyModel(models.Model):
         return int(self.latitude)
     
     def latitude_minutes(self):
-        no_degrees = self.latitude-latitude_degrees()
+        no_degrees = self.latitude-self.latitude_degrees()
         
         return int(no_degrees*60)
     
     def latitude_seconds(self):
-        no_degrees = self.latitude-latitude_degrees()
-        no_minutes = no_degrees*60-latitude_minutes()
+        no_degrees = self.latitude-self.latitude_degrees()
+        no_minutes = no_degrees*60-self.latitude_minutes()
         
         return int(no_minutes*60)
 

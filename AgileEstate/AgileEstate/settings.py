@@ -13,8 +13,6 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import os
 import base64
 
-DEBUG = False
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -85,13 +83,6 @@ WSGI_APPLICATION = 'AgileEstate.wsgi.application'
 if DEBUG:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
-    }
-else:
-    DATABASES = {
-        'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'd5inup5oc0qn4v',
             'USER': 'sfdtgchubvysqi',
@@ -100,6 +91,8 @@ else:
             'PORT': '5432',
         }
     }
+else:
+    raise SystemExit("NO DATABASE")
 
 
 # Password validation
