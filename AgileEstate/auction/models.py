@@ -7,9 +7,9 @@ from django.utils import timezone
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 class BiddingModel(models.Model):
-    property_key = models.OneToOneField('estate.PropertyModel', models.CASCADE)
-    owner_key = models.OneToOneField('users.UserProfile', on_delete=models.CASCADE)
-    #winner_key = models.OneToOneField('users.UserProfile', on_delete=models.CASCADE)
+    property_key = models.OneToOneField('estate.PropertyModel', on_delete=models.CASCADE)
+    owner_key = models.OneToOneField('users.UserProfile', default=0, related_name="%(class)s_owner_user", on_delete=models.CASCADE)
+    winner_key = models.OneToOneField('users.UserProfile', default=0, related_name="%(class)s_winner_user", on_delete=models.CASCADE)
     
     start_time = models.DateTimeField( default=timezone.now() )
     end_time = models.DateTimeField( default=timezone.now(), validators=[ MinValueValidator(start_time) ] )

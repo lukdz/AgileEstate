@@ -9,40 +9,30 @@ class Places:
 
 class PropertyModel(models.Model):
     VIEW_TYPES = {0 : "shit", 1 : "poor", 2 : "bad", 3 : "good", 4 : "nice", 5 : "great", 6 : "awesome", 7 : "wonderful", 8 : "breath-taking", 9 : "paradise"}
-    
+
     country = models.TextField( list(Places.COUNTRIES.items()) )
-    longitude = models.FloatField( default=0.0, validators=[ MinValueValidator(-180.0), MaxValueValidator(-180.0) ] )
-    latitude = models.FloatField( default=0.0, validators=[ MinValueValidator(-90.0), MaxValueValidator(90.0) ] )
-    
-    surface = models.DecimalField( max_digits=902, decimal_places=4, validators=[ MinValueValidator(0.0) ] )
-    num_rooms = models.PositiveIntegerField( validators=[MinValueValidator(3)] )
+    longitude = models.IntegerField( default=0, validators=[ MinValueValidator(-648000), MaxValueValidator(-648000) ] )
+    latitude = models.IntegerField( default=0, validators=[ MinValueValidator(-324000), MaxValueValidator(324000) ] )
+
+    surface = models.DecimalField( max_digits=904, decimal_places=4, validators=[ MinValueValidator(0.0) ] )
+    rooms = models.PositiveIntegerField( validators=[MinValueValidator(3)] )
     window_view = models.IntegerField( list(VIEW_TYPES.items()), default=5, validators=[MinValueValidator(0), MaxValueValidator(9)] )
-    
-    def longitude_degrees(self):
-        return int(self.longitude)
-    
-    def longitude_minutes(self):
-        no_degrees = self.longitude-self.longitude_degrees()
-        
-        return int(no_degrees*60)
-    
-    def longitude_seconds(self):
-        no_degrees = self.longitude-self.longitude_degrees()
-        no_minutes = no_degrees*60-self.longitude_minutes()
-        
-        return int(no_minutes*60)
-    
-    def latitude_degrees(self):
-        return int(self.latitude)
-    
-    def latitude_minutes(self):
-        no_degrees = self.latitude-self.latitude_degrees()
-        
-        return int(no_degrees*60)
-    
-    def latitude_seconds(self):
-        no_degrees = self.latitude-self.latitude_degrees()
-        no_minutes = no_degrees*60-self.latitude_minutes()
-        
-        return int(no_minutes*60)
+
+    def get_longitude(self):
+        return (self.longitude//3600, (self.longitude//60)%60, self.longitude%60)
+
+    def set_longitude(self, deg, min, sec):
+        if -180 <= deg <= 180 and 0 <= min <= 60 and 0 <= sec <= 60:
+            self.longitude = deg*3600+min*60+sec
+        else:
+            raise ArithmeticError("Incorrect values of longitude coordinates.")
+
+    def get_latitude(self):
+        return (self.latitude//3600, (self.latitude//60)%60, self.latitude%60)
+
+    def set_latitude(self, deg, min, sec):
+        if -90 <= deg <= 90 and 0 <= min <= 60 and 0 <= sec <= 60:
+            self.latitude = deg*3600+min*60+sec
+        else:
+            raise ArithmeticError("Incorrect values of latitude coordinates.")
 
