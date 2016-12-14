@@ -84,6 +84,17 @@ if DEBUG:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'agileestate',
+            'USER': 'django',
+            'PASSWORD': 'django-postgres',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'd5inup5oc0qn4v',
             'USER': 'sfdtgchubvysqi',
             'PASSWORD': (base64.b64decode('bnZZcER4X0oxelFxQzY3dnI=') + 'Lunt8RH44hydhhdfh')[:-8],
@@ -91,8 +102,6 @@ if DEBUG:
             'PORT': '5432',
         }
     }
-else:
-    raise SystemExit("NO DATABASE")
 
 
 # Password validation
