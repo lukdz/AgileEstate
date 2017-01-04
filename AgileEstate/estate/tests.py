@@ -1,4 +1,4 @@
-from decimal import *
+from decimal import Decimal, getcontext
 
 from django.test import TestCase
 from .models import PropertyModel
@@ -6,7 +6,8 @@ from .models import PropertyModel
 class PropertyModelTestCase(TestCase):
     def setUp(self):
         getcontext().prec = 4
-        self.model = PropertyModel( country="Poland", longitude=180900, latitude=41869, surface=Decimal(1234.56), rooms = 6, window_view="7" )
+        self.model = PropertyModel(country="Poland", longitude=180900, latitude=41869,
+                                   surface=Decimal(1234.56), rooms=6, window_view="7")
 
     def tearDown(self):
         pass
