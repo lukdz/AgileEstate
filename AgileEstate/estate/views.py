@@ -13,3 +13,14 @@ def estate_form(request):
         form = EstateForm()
 
     return render(request, 'EstateForm.html', {'form': form})
+
+def estate_form(request):
+    if request.method == 'POST':
+        form = EstateForm(request.POST)
+
+        if form.is_valid():
+            return HttpResponseRedirect('/display/')
+    else:
+        form = EstateForm()
+
+    return render(request, '/templates/base.html', {'form': form})
