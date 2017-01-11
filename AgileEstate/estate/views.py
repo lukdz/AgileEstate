@@ -1,11 +1,15 @@
-from django.views.generic.edit import FormView
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
 
-from .forms import PropertyForm
+from .forms import EstateForm
 
-class PropertyFormView(FormView):
-    template_name = "add-property.html"
-    form_class = PropertyForm
-    success_url = "/success/"
+def estate_form(request):
+    if request.method == 'POST':
+        form = EstateForm(request.POST)
 
-    def form_valid(self, form):
-        return super(PropertyFormView, self).form_valid(form)
+        if form.is_valid():
+            return HttpResponseRedirect('/success/')
+    else:
+        form = EstateForm()
+
+    return render(request, 'EstateForm.html', {'form': form})

@@ -11,7 +11,7 @@ class Places:
                  "Switzerland" : "CHE", "United Kingdom" : "GBR",
                  "United States of America" : "USA"}
 
-class PropertyModel(models.Model):
+class EstateModel(models.Model):
     VIEW_TYPES = {"shit" : 0, "poor" : 1, "bad" : 2, "good" : 3, "nice" : 4, "great" : 5,
                   "awesome" : 6, "wonderful" : 7, "breath-taking" : 8, "paradise" : 9}
 
