@@ -33,18 +33,18 @@ class PropertyModel(models.Model):
     def get_longitude(self):
         return (self.longitude//3600, (self.longitude//60)%60, self.longitude%60)
 
-    def set_longitude(self, deg, min, sec):
+    def count_longitude(self, deg, min, sec):
         if -180 <= deg <= 180 and 0 <= min <= 60 and 0 <= sec <= 60:
-            self.longitude = deg*3600+min*60+sec
+            return deg*3600+min*60+sec
         else:
             raise ArithmeticError("Incorrect values of longitude coordinates.")
 
     def get_latitude(self):
         return (self.latitude//3600, (self.latitude//60)%60, self.latitude%60)
 
-    def set_latitude(self, deg, min, sec):
+    def count_latitude(self, deg, min, sec):
         if -90 <= deg <= 90 and 0 <= min <= 60 and 0 <= sec <= 60:
-            self.latitude = deg*3600+min*60+sec
+            return deg*3600+min*60+sec
         else:
             raise ArithmeticError("Incorrect values of latitude coordinates.")
 

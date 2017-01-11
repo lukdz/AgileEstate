@@ -20,15 +20,14 @@ class BiddingModel(models.Model):
     actual_price = models.DecimalField( max_digits=902, decimal_places=2, default=start_price,
                                         blank=True, validators=[ MinValueValidator(start_price) ] )
 
-    def set_new_actual_price(self, new_price, time, testing=False):
+    def check_new_actual_price(self, new_price, time):
         if not self.is_bid_open(time):
             raise SystemError("Cannot bid when auction is not open.")
 
         if new_price <= self.actual_price:
             raise AttributeError("New price is less than actual price.")
 
-        if not testing:
-            self.actual_price = new_price
+        return True
 
     def is_bid_open(self, time):
         return self.start_time <= time <= self.end_time

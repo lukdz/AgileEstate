@@ -24,10 +24,10 @@ class BiddingModelTestCase(TestCase):
     def test_bid_open_correct(self):
         self.assertTrue( self.model_test.is_bid_open( datetime(2001, 7, 8, 9, 10, 11) ) )
 
-    def test_set_new_actual_price_error_1(self):
+    def test_check_new_actual_price_error_1(self):
         try:
-            self.model_test.set_new_actual_price(Decimal(210.00), datetime(2003, 7, 8, 9, 10, 11),
-                                                 testing=True)
+            result = self.model_test.check_new_actual_price( Decimal(210.00),
+                                                             datetime(2003, 7, 8, 9, 10, 11), )
         except SystemError:
             pass
         except:
@@ -35,10 +35,10 @@ class BiddingModelTestCase(TestCase):
         else:
             self.fail()
 
-    def test_set_new_actual_price_error_2(self):
+    def test_check_new_actual_price_error_2(self):
         try:
-            self.model_test.set_new_actual_price(Decimal(190.00), datetime(2001, 7, 8, 9, 10, 11),
-                                                 testing=True)
+            result = self.model_test.check_new_actual_price( Decimal(190.00),
+                                                             datetime(2001, 7, 8, 9, 10, 11) )
         except AttributeError:
             pass
         except:
@@ -46,6 +46,7 @@ class BiddingModelTestCase(TestCase):
         else:
             self.fail()
 
-    def test_set_new_actual_price_correct(self):
-        self.model_test.set_new_actual_price(Decimal(210.00), datetime(2001, 7, 8, 9, 10, 11),
-                                             testing=True)
+    def test_check_new_actual_price_correct(self):
+        result = self.model_test.check_new_actual_price( Decimal(210.00),
+                                                         datetime(2001, 7, 8, 9, 10, 11) )
+        self.assertTrue(result)
