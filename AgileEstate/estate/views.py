@@ -8,13 +8,13 @@ def estate_form(request):
         form = EstateForm(request.POST)
 
         if form.is_valid():
-            return HttpResponseRedirect('/success/')
+            return HttpResponseRedirect('/estate_added/')
     else:
         form = EstateForm()
 
     return render(request, 'EstateForm.html', {'form': form})
 
-def estate_form(request):
+def estate_base(request):
     if request.method == 'POST':
         form = EstateForm(request.POST)
 
