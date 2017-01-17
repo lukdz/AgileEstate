@@ -14,6 +14,6 @@ def estate_new(request):
 
     return render(request, '/templates/estateNew.html', {'form': form})
 
-def estate_details(request):
+def estate_details(request, estateid):
     if request.method == 'GET':
         return render_to_response('/templates/estateDetails.html')
