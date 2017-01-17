@@ -18,5 +18,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^profile/', include("users.urls")) 
+    url(r'^profile/', include("users.urls")),
+    url(r'^estate/', include("estate.urls")),
+    url(r'^bidding/', include("auction.urls")),
 ]

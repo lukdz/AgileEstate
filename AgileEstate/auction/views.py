@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 
 from .forms import BiddingForm
 
-def bidding_form(request):
+def bidding_new(request):
     if request.method == 'POST':
         form = BiddingForm(request.POST)
 
@@ -12,4 +12,4 @@ def bidding_form(request):
     else:
         form = BiddingForm()
 
-    return render(request, 'BiddingForm.html', {'form': form})
+    return render(request, 'templates/biddingNew.html', {'form': form})
