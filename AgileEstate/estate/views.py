@@ -2,6 +2,7 @@ from django.shortcuts import render, render_to_response
 from django.http import HttpResponseRedirect
 
 from .forms import EstateForm
+from .models import EstateModel
 
 def estate_new(request):
     if request.method == 'POST':
@@ -23,5 +24,6 @@ def estate_details(request, estateid):
         return render_to_response('estateDetails.html')
 
 def estate_all(request):
+    estates = EstateModel.objects.order_by('rooms')
     if request.method == 'GET':
-        return render_to_response('estateAll.html')
+        return render_to_response('estateAll.html', {'estates': estates})
