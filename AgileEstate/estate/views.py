@@ -17,3 +17,7 @@ def estate_new(request):
 def estate_details(request, estateid):
     if request.method == 'GET':
         return render_to_response('/templates/estateDetails.html')
+
+def estate_all(request):
+    if request.method == 'GET':
+        return render_to_response('estateAll.html')
