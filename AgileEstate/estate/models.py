@@ -5,17 +5,20 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Places:
-    COUNTRIES = {"Afghanistan" : "AFG", "Albania" : "ALB", "Algeria" : "DZA", "Canada" : "CAN",
-                 "France" : "FRA", "Germany" : "DEU", "Hong Kong" : "HKG", "Japan" : "JPN",
-                 "North Korea" : "PRK", "Poland" : "POL", "South Korea" : "KOR",
-                 "Switzerland" : "CHE", "United Kingdom" : "GBR",
-                 "United States of America" : "USA"}
+    COUNTRIES = {"AFG" : "Afghanistan", "ALB" : "Albania", "CAN" : "Canada", "CHE" : "Switzerland",
+                 "DEU" : "Germany", "DZA" : "Algeria", "FRA" : "France", "GBR" : "United Kingdom",
+                 "HKG" : "Hong Kong", "JPN" : "Japan", "KOR" : "South Korea", "POL" : "Poland",
+                 "PRK" : "North Korea", "USA" : "United States of America"}
 
 class EstateModel(models.Model):
-    VIEW_TYPES = {"shit" : 0, "poor" : 1, "bad" : 2, "good" : 3, "nice" : 4, "great" : 5,
-                  "awesome" : 6, "wonderful" : 7, "breath-taking" : 8, "paradise" : 9}
+    _BY_SECOND = lambda pair: (pair[1], pair[0])
+    _VIEWS = {0 : "shit", 1 : "poor", 2 : "bad", 3 : "good", 4 : "nice", 5 : "great",
+              6 : "awesome", 7 : "wonderful", 8 : "breath-taking", 9 : "paradise"}
 
-    country = models.TextField( choices=tuple(Places.COUNTRIES.items()) )
+    owner_key = models.OneToOneField("users.UserProfile", default=0, on_delete=models.CASCADE,
+                                     related_name="%(class)s_owner_user")
+    country = models.CharField( max_length=1,
+                                choices=sorted(Places.COUNTRIES.items(), key=_BY_SECOND) )
     longitude = models.IntegerField(default=0,
                                     validators=[MinValueValidator(-648000),
                                                 MaxValueValidator(648000)])
@@ -26,25 +29,24 @@ class EstateModel(models.Model):
     surface = models.DecimalField(max_digits=904, decimal_places=4, default=Decimal(0.0),
                                   validators=[MinValueValidator( Decimal(0.0) )])
     rooms = models.PositiveIntegerField(validators=[MinValueValidator(3)])
-    window_view = models.PositiveSmallIntegerField(choices=tuple(VIEW_TYPES.items()), default=5,
-                                                   validators=[MinValueValidator(0),
-                                                               MaxValueValidator(9)])
+    window_view = models.CharField(max_length=1, choices=sorted(_VIEWS.items(), key=_BY_SECOND),
+                                   validators=[MinValueValidator(0), MaxValueValidator(9)])
 
     def get_longitude(self):
         return self.longitude//3600, (self.longitude//60)%60, self.longitude%60
 
-    def count_longitude(self, deg, min, sec):
-        if -180 <= deg <= 180 and 0 <= min <= 60 and 0 <= sec <= 60:
-            return deg*3600+min*60+sec
+    def count_longitude(self, degs, mins, secs):
+        if -180 <= degs <= 180 and 0 <= mins <= 60 and 0 <= secs <= 60:
+            return degs*3600+mins*60+secs
         else:
             raise ArithmeticError("Incorrect values of longitude coordinates.")
 
-    def get_latitude(self):
-        return (self.latitude//3600, (self.latitude//60)%60, self.latitude%60)
+    def get_latitude(self, latitude):
+        return self.latitude//3600, (self.latitude//60)%60, self.latitude%60
 
-    def count_latitude(self, deg, min, sec):
-        if -90 <= deg <= 90 and 0 <= min <= 60 and 0 <= sec <= 60:
-            return deg*3600+min*60+sec
+    def count_latitude(self, degs, mins, secs):
+        if -90 <= degs <= 90 and 0 <= mins <= 60 and 0 <= secs <= 60:
+            return degs*3600+mins*60+secs
         else:
             raise ArithmeticError("Incorrect values of latitude coordinates.")
 
