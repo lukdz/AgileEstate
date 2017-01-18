@@ -8,8 +8,11 @@ def bidding_new(request):
         form = BiddingForm(request.POST)
 
         if form.is_valid():
+            bidding = form.save(commit=False)
+            data = form.cleaned_data
+            bidding.actual_price = data["start_price"]
             return HttpResponseRedirect('/bidding_starts/')
     else:
         form = BiddingForm()
 
-    return render(request, 'templates/biddingNew.html', {'form': form})
+    return render(request, 'biddingNew.html', {'form': form})
