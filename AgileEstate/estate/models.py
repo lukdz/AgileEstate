@@ -5,20 +5,23 @@ from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Places:
-    COUNTRIES = {"AFG" : "Afghanistan", "ALB" : "Albania", "CAN" : "Canada", "CHE" : "Switzerland",
+    _COUNTRIES = {"AFG" : "Afghanistan", "ALB" : "Albania", "CAN" : "Canada", "CHE" : "Switzerland",
                  "DEU" : "Germany", "DZA" : "Algeria", "FRA" : "France", "GBR" : "United Kingdom",
                  "HKG" : "Hong Kong", "JPN" : "Japan", "KOR" : "South Korea", "POL" : "Poland",
                  "PRK" : "North Korea", "USA" : "United States of America"}
 
+    @classmethod
+    def get_sorted_items(cls):
+        return sorted(cls._COUNTRIES.items(), key=lambda pair: (pair[1], pair[0]))
+
+
 class EstateModel(models.Model):
-    _BY_SECOND = lambda pair: (pair[1], pair[0])
     _VIEWS = {0 : "shit", 1 : "poor", 2 : "bad", 3 : "good", 4 : "nice", 5 : "great",
               6 : "awesome", 7 : "wonderful", 8 : "breath-taking", 9 : "paradise"}
 
     owner_key = models.OneToOneField("users.UserProfile", default=0, on_delete=models.CASCADE,
                                      related_name="%(class)s_owner_user")
-    country = models.CharField( max_length=1,
-                                choices=sorted(Places.COUNTRIES.items(), key=_BY_SECOND) )
+    country = models.CharField(max_length=1, choices=Places.get_sorted_items())
     longitude = models.IntegerField(default=0,
                                     validators=[MinValueValidator(-648000),
                                                 MaxValueValidator(648000)])
@@ -29,7 +32,7 @@ class EstateModel(models.Model):
     surface = models.DecimalField(max_digits=904, decimal_places=4, default=Decimal(0.0),
                                   validators=[MinValueValidator( Decimal(0.0) )])
     rooms = models.PositiveIntegerField(validators=[MinValueValidator(3)])
-    window_view = models.CharField(max_length=1, choices=sorted(_VIEWS.items(), key=_BY_SECOND),
+    window_view = models.CharField(max_length=1, choices=sorted(_VIEWS.items()),
                                    validators=[MinValueValidator(0), MaxValueValidator(9)])
 
     def get_longitude(self):
