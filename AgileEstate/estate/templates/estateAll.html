@@ -1,12 +1,23 @@
 <html>
 
 <head>
+	<title>Dostępne posiadłości</title>
+	<meta charset="utf-8">
 </head>
 
 <body>
 	<div>
-		<h1><a href="/">Django Girls Blog</a></h1>
+		<h1>Dostępne są następujące posiadłości</h1>
     	</div>
+	<div>
+                {{ estates }}
+    	</div>
+	<div>
+		{% for estates in estates %}
+			{{ estates }}
+		        <p>rooms: {{ estates.rooms }}</p>
+		{% endfor %}
+	</div>
 </body>
 
 </html>
