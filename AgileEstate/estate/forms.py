@@ -7,12 +7,12 @@ class EstateForm(forms.ModelForm):
         model = EstateModel
         fields = ("country", "surface", "rooms", "window_view")
 
-    lng_degrees = forms.IntegerField(label="degrees of longitude")
-    lng_minutes = forms.IntegerField(label="minutess of longitude")
-    lng_seconds = forms.IntegerField(label="seconds of longitude")
-    lat_degrees = forms.IntegerField(label="degrees of latitude")
-    lat_minutes = forms.IntegerField(label="minutess of latitude")
-    lat_seconds = forms.IntegerField(label="seconds of latitude")
+    lng_degrees = forms.IntegerField(label="degrees of longitude", min_value=-179, max_value=180)
+    lng_minutes = forms.IntegerField(label="minutess of longitude", min_value=0, max_value=60)
+    lng_seconds = forms.IntegerField(label="seconds of longitude", min_value=0, max_value=60)
+    lat_degrees = forms.IntegerField(label="degrees of latitude", min_value=-90, max_value=90)
+    lat_minutes = forms.IntegerField(label="minutess of latitude", min_value=0, max_value=60)
+    lat_seconds = forms.IntegerField(label="seconds of latitude", min_value=0, max_value=60)
 
     def clean_lng_degrees(self):
         lng_deg = self.cleaned_data["lng_degrees"]

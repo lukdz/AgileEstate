@@ -11,8 +11,10 @@ def estate_new(request):
         if form.is_valid():
             estate = form.save(commit=False)
             data = form.cleaned_data
-            estate.longitude = data["lng_degrees"]*3600+data["lng_minutes"]*60+data["lng_seconds"]
-            estate.latitude = data["lat_degrees"]*3600+data["lat_minutes"]*60+data["lat_seconds"]
+            estate.longitude = estate.count_longitude(data["lng_degrees"], data["lng_minutes"],
+                                                      data["lng_seconds"])
+            estate.latitude = estate.count_latitude(data["lat_degrees"], data["lat_minutes"],
+                                                    data["lat_seconds"])
             return HttpResponseRedirect('/estate_created/')
     else:
         form = EstateForm()
