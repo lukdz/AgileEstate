@@ -61,6 +61,8 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
         BASE_DIR + '/users/templates/',
+        BASE_DIR + '/auction/templates/'
+        BASE_DIR + '/estate/templates/'
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -92,16 +94,16 @@ if DEBUG:
         }
     }
 else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'd5inup5oc0qn4v',
-            'USER': 'sfdtgchubvysqi',
-            'PASSWORD': (base64.b64decode('bnZZcER4X0oxelFxQzY3dnI=') + 'Lunt8RH44hydhhdfh')[:-8],
-            'HOST': 'ec2-79-125-110-211.eu-west-1.compute.amazonaws.com',
-            'PORT': '5432',
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd5inup5oc0qn4v',
+        'USER': 'sfdtgchubvysqi',
+        'PASSWORD': (base64.b64decode('bnZZcER4X0oxelFxQzY3dnI=') + 'Lunt8RH44hydhhdfh')[:-8],
+        'HOST': 'ec2-79-125-110-211.eu-west-1.compute.amazonaws.com',
+        'PORT': '5432',
     }
+}
 
 
 # Password validation
