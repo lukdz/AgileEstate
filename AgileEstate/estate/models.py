@@ -19,7 +19,7 @@ class EstateModel(models.Model):
     _VIEWS = {0 : "shit", 1 : "poor", 2 : "bad", 3 : "good", 4 : "nice", 5 : "great",
               6 : "awesome", 7 : "wonderful", 8 : "breath-taking", 9 : "paradise"}
 
-    owner_key = models.OneToOneField("users.UserProfile", default=0, on_delete=models.CASCADE,
+    owner_key = models.OneToOneField("users.UserProfile", default=3, on_delete=models.CASCADE,
                                      related_name="%(class)s_owner_user")
     country = models.CharField(max_length=1, choices=Places.get_sorted_items())
     longitude = models.IntegerField(default=0,
