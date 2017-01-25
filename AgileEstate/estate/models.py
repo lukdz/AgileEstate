@@ -14,6 +14,9 @@ class Places:
     def get_sorted_items(cls):
         return sorted(cls._COUNTRIES.items(), key=lambda pair: (pair[1], pair[0]))
 
+    def get_country_name(self, code):
+        return self._COUNTRIES[code]
+
 
 class EstateModel(models.Model):
     _VIEWS = {0 : "shit", 1 : "poor", 2 : "bad", 3 : "good", 4 : "nice", 5 : "great",
