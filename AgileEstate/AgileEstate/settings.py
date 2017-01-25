@@ -24,7 +24,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'g6zkhlltk6-ffjl8xddb!tz8(y$$dgq=&phevu!dh(d3db$bf!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
+TEST = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -83,15 +84,27 @@ WSGI_APPLICATION = 'AgileEstate.wsgi.application'
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
 if DEBUG:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'agileestate',
-            'USER': 'django',
-            'PASSWORD': 'django-postgres',
-            'HOST': 'localhost',
-            'PORT': '',
+    if TEST:
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql_psycopg2',
+                'NAME': 'agileestate',
+                'USER': 'django',
+                'PASSWORD': 'django-postgres',
+                'HOST': 'localhost',
+                'PORT': '',
+            }
         }
+    else:
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql_psycopg2',
+                'NAME': 'd5inup5oc0qn4v',
+                'USER': 'sfdtgchubvysqi',
+                'PASSWORD': (base64.b64decode('bnZZcER4X0oxelFxQzY3dnI=') + 'Lunt8RH44hydhhdfh')[:-8],
+                'HOST': 'ec2-79-125-110-211.eu-west-1.compute.amazonaws.com',
+                'PORT': '5432',
+            }
     }
 else:
     DATABASES = {
@@ -103,7 +116,7 @@ else:
             'HOST': 'ec2-79-125-110-211.eu-west-1.compute.amazonaws.com',
             'PORT': '5432',
         }
-}
+    }
 
 
 # Password validation
