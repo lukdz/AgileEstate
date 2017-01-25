@@ -4,10 +4,14 @@ from django.test import TestCase
 from .models import EstateModel
 
 class EstateModelTestCase(TestCase):
-    def countUp(self):
+    def __init__(self, *args, **kwargs):
+        self.model = None
+        super(EstateModelTestCase, self).__init__(*args, **kwargs)
+
+    def setUp(self):
         getcontext().prec = 4
-        self.model = EstateModel(country="Poland", longitude=180900, latitude=41869,
-                                   surface=Decimal(1234.56), rooms=6, window_view="7")
+        self.model = EstateModel(country="POL", longitude=180900, latitude=41869,
+                                 surface=Decimal(1234.56), rooms=6, window_view=7)
 
     def tearDown(self):
         pass
@@ -24,13 +28,14 @@ class EstateModelTestCase(TestCase):
         self.assertEquals(result[1], 37)
         self.assertEquals(result[2], 49)
 
-    def test_count_longitude_correct(self):
-        result = self.model.count_longitude(52, 18, 30)
+    def test_set_longitude_correct(self):
+        self.model.set_longitude(52, 18, 30)
+        result = self.model.longitude
         self.assertEquals(result, 188310)
 
-    def test_count_longitude_error(self):
+    def test_set_longitude_error(self):
         try:
-            result = self.model.count_longitude(13, 67, 44)
+            self.model.set_longitude(13, 67, 44)
         except ArithmeticError:
             pass
         except:
@@ -38,16 +43,21 @@ class EstateModelTestCase(TestCase):
         else:
             self.fail()
 
-    def test_count_latitude_correct(self):
-        result = self.model.count_latitude(23, 55, 16)
+    def test_set_latitude_correct(self):
+        result = self.model.set_latitude(23, 55, 16)
+        result = self.model.latitude
         self.assertEquals(result, 86116)
 
-    def test_count_latitude_error(self):
+    def test_set_latitude_error(self):
         try:
-            result = self.model.count_longitude(48, 4, 71)
+            result = self.model.set_longitude(48, 4, 71)
         except ArithmeticError:
             pass
         except:
             self.fail()
         else:
             self.fail()
+
+    def test_get_window_view_name(self):
+        result = self.model.get_window_view_name()
+        self.assertEquals(result, "wonderful")

@@ -32,24 +32,27 @@ class EstateModel(models.Model):
     surface = models.DecimalField(max_digits=904, decimal_places=4, default=Decimal(0.0),
                                   validators=[MinValueValidator( Decimal(0.0) )])
     rooms = models.PositiveIntegerField(validators=[MinValueValidator(3)])
-    window_view = models.PositiveIntegerField(max_length=15, choices=sorted(_VIEWS.items()),
-                                   validators=[MinValueValidator(0), MaxValueValidator(9)])
+    window_view = models.PositiveIntegerField(choices=sorted(_VIEWS.items()),
+                                              validators=[MinValueValidator(0),
+                                                          MaxValueValidator(9)])
 
     def get_longitude(self):
         return self.longitude//3600, (self.longitude//60)%60, self.longitude%60
 
-    def count_longitude(self, degs, mins, secs):
+    def set_longitude(self, degs, mins, secs):
         if -180 <= degs <= 180 and 0 <= mins <= 60 and 0 <= secs <= 60:
-            return degs*3600+mins*60+secs
+            self.longitude = degs*3600+mins*60+secs
         else:
             raise ArithmeticError("Incorrect values of longitude coordinates.")
 
-    def get_latitude(self, latitude):
+    def get_latitude(self):
         return self.latitude//3600, (self.latitude//60)%60, self.latitude%60
 
-    def count_latitude(self, degs, mins, secs):
+    def set_latitude(self, degs, mins, secs):
         if -90 <= degs <= 90 and 0 <= mins <= 60 and 0 <= secs <= 60:
-            return degs*3600+mins*60+secs
+            self.latitude =  degs*3600+mins*60+secs
         else:
             raise ArithmeticError("Incorrect values of latitude coordinates.")
 
+    def get_window_view_name(self):
+        return self._VIEWS[self.window_view]
