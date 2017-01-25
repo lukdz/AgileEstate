@@ -8,6 +8,6 @@ class UserProfile(models.Model):
     gender = models.CharField(max_length=140)
     firstname = models.CharField(max_length=140)
     lastname = models.CharField(max_length=140)
-    profile_picture = models.ImageField(upload_to='thumbpath', blank=True)
+    profile_picture = models.CharField(max_length=140)
 
 User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])

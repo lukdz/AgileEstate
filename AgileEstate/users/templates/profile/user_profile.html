@@ -1,17 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Profil</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-</head>
-<body>
-  <h2>Profil</h2>
+{% extends 'profile/base_visitor.html' %}
+{% block title %}Register{% endblock %}
+{% block register_active %}active{% endblock %}
 
- {{ user.username }}
- {{ user.email }}
- {{ user.first_name }}
- {{ user.last_name }}
+{% block body %}
+<table class="table">
+  <tr>
+    <th>Icon</th>
+    <th>Username</th>
+    <th>E-mail</th>
+    <th>Name</th>
+    <th>Lastname</th>
+    <th>Gender</th>
+  <tr>
+    <td style="height: 80px; width: 30px;"><img style="max-width: 100%;max-height: 100%;" src= {{ profile.profile_picture }}></td>
+   <td>{{ user.username }}</td>
+   <td>{{ user.email }}</td>
+   <td>{{ profile.firstname }}</td>
+   <td>{{ profile.lastname }}</td>
+   <td>{{ profile.gender }}</td>
+ </tr>
+</table>
 
-</body>
-</html>
+{% endblock %}
