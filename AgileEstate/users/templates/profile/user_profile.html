@@ -19,6 +19,22 @@
    <td>{{ profile.lastname }}</td>
    <td>{{ profile.gender }}</td>
  </tr>
+
+</table>
+
+<h1>My Estates</h1>
+
+<table class='table'>
+  <tr>
+    <th>Country</th>
+    <th>Rooms</th>
+  <tr>
+  {% for estate in estates%}
+  <tr>
+    <td> estate.country </td>
+    <td> estate.rooms </td>
+  </tr>
+  {% endfor %}
 </table>
 
 {% endblock %}

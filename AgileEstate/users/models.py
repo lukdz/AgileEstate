@@ -10,4 +10,7 @@ class UserProfile(models.Model):
     lastname = models.CharField(max_length=140)
     profile_picture = models.CharField(max_length=140)
 
+    def __unicode__( self ):
+        return self.firstname + " " + self.lastname
+
 User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])
