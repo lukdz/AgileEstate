@@ -21,7 +21,7 @@ class EstateModel(models.Model):
 
     owner_key = models.OneToOneField("users.UserProfile", default=3, on_delete=models.CASCADE,
                                      related_name="%(class)s_owner_user")
-    country = models.CharField(max_length=1, choices=Places.get_sorted_items())
+    country = models.CharField(max_length=3, choices=Places.get_sorted_items())
     longitude = models.IntegerField(default=0,
                                     validators=[MinValueValidator(-648000),
                                                 MaxValueValidator(648000)])
@@ -32,7 +32,7 @@ class EstateModel(models.Model):
     surface = models.DecimalField(max_digits=904, decimal_places=4, default=Decimal(0.0),
                                   validators=[MinValueValidator( Decimal(0.0) )])
     rooms = models.PositiveIntegerField(validators=[MinValueValidator(3)])
-    window_view = models.CharField(max_length=1, choices=sorted(_VIEWS.items()),
+    window_view = models.PositiveIntegerField(max_length=15, choices=sorted(_VIEWS.items()),
                                    validators=[MinValueValidator(0), MaxValueValidator(9)])
 
     def get_longitude(self):

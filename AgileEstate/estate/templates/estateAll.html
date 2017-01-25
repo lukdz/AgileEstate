@@ -13,16 +13,9 @@
                 {{ estates }}
     	</div>
 	<div>
-	        <p>ALL:</p>
 		{% for estates in estates %}
 			{{ estates }}
-		        <p>country: {{ estates.country }}</p>
-		        <p>longitude: {{ estates.longitude }}</p>
-		        <p>latitude: {{ estates.latitude }}</p>
-		        <p>surface: {{ estates.surface }}</p>
 		        <p>rooms: {{ estates.rooms }}</p>
-		        <p>window_view: {{ estates.window_view }}</p>
-		        <p>NEXT</p>
 		{% endfor %}
 	</div>
 </body>
