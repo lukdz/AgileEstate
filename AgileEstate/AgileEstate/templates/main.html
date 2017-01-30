@@ -1,59 +1,78 @@
 <html>
 
 <head>
-	<title>AgileEstate</title>
-	<meta charset="utf-8">
-	<style type="text/css">
-		h1 {
-			color: white;
-			background-color: black;
-			padding: 0.1cm 0.5cm 0.1cm 0.5cm;
-			margin:0; }
-		body {
-			margin: 0;			
-			background-color: #f2f2f2 }
-		section	{
-			max-width: 900px; }
-		#estate {
-			margin: 0.5cm;	
-			padding: 0.1cm 0.5cm 0.1cm 0.5cm;		
-			background-color: white; }
-		#link {
-			line-height: 150%;}
-	</style>
-	<script>
-		function mainHref() {
-			var x = document.getElementById("link").href;
-			document.getElementById("link").href = window.location.href + x;
-		}
-		window.onload = mainHref();
-	</script>
+    <title>AgileEstate</title>
+    <meta charset="utf-8">
+    <style type="text/css">
+        header {
+            display: flex;
+            flex-direction: row;
+        }
+        
+        #title {
+            padding: 0.1cm 0.5cm 0.1cm 0.5cm;
+            margin: 0;
+            flex-grow: 4;
+            color: white;
+            background-color: black;
+        }
+        
+        #login {
+            text-align: center;
+            padding: 0.1cm 0.5cm 0.1cm 0.5cm;
+            margin: 0;
+            flex-grow: 1;
+            background-color: mediumseagreen;
+        }
+        
+        body {
+            margin: 0;
+            background-color: #f2f2f2
+        }
+        
+        section {
+            max-width: 900px;
+        }
+        
+        #estate {
+            margin: 0.5cm;
+            padding: 0.1cm 0.5cm 0.1cm 0.5cm;
+            background-color: white;
+        }
+        
+        #link {
+            display: block;
+            line-height: 150%;
+        }
+    </style>
+    <script>
+        function mainHref() {
+            var x = document.getElementById("link").href;
+            document.getElementById("link").href = window.location.href + x;
+        }
+        window.onload = mainHref();
+    </script>
 </head>
 
 <body>
-	<header>
-		<h1>AgileEstate</h1>
-	</header>
-	
-	<section>
-		<div id="estate">
-			<h3>Największa na świecie agencja zajmująceja się handlem nieruchomościami.</h3>
-			<a href="estate" id="link">Wyświetl posiadłości</a> <br>
-			<a href="estate/new" id="link">Dodaj posiadłość</a> <br>
-			<a href="admin" id="link">Zaloguj się</a> <br>
-			<br> Poniżej przygotowane makiety linków na dodatnie nowych odnośników<br>
-			<a href="TUTAJ LINK" id="link">TUTAJ NAZWA</a> <br>
-			<a href="TUTAJ LINK" id="link">TUTAJ NAZWA</a> <br>
-			<a href="TUTAJ LINK" id="link">TUTAJ NAZWA</a> <br>
-			<a href="TUTAJ LINK" id="link">TUTAJ NAZWA</a> <br>
-			<a href="TUTAJ LINK" id="link">TUTAJ NAZWA</a> <br>
-			<a href="TUTAJ LINK" id="link">TUTAJ NAZWA</a> <br>
-		</div> 
-	</section>
+    <header>
+        <h1 id="title">AgileEstate</h1>
+        <h2 id="login"><a href={% url 'users:login_user' %} id="link">ZALOGUJ SIĘ</a></h2>
+    </header>
 
-	<footer>
+    <section>
+        <div id="estate">
+            <h3 id="greet">Największa na świecie agencja zajmująca się handlem nieruchomościami.</h3>
+            <div id="links">
+                <a href={% url 'estate:estate_all' %} id="link">Wyświetl posiadłości</a>
+                <a href={% url 'estate:estate_new' %} id="link">Dodaj posiadłość</a>
+            </div>
+        </div>
+    </section>
 
-	</footer>
+    <footer>
+
+    </footer>
 </body>
 
 </html>
