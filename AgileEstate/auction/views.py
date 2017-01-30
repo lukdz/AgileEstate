@@ -1,5 +1,4 @@
-from django.shortcuts import render, render_to_response
-from django.http import HttpResponseRedirect
+from django.shortcuts import render, render_to_response, redirect
 
 from .forms import BiddingForm
 
@@ -14,9 +13,9 @@ def bidding_new(request):
 
             if not form.user.is_anonymous:
                 bidding.owner_key = form.user
-                bidding.winner_key = owner_key
+                bidding.winner_key = bidding.owner_key
 
-            return HttpResponseRedirect('added/')
+            return redirect('bidding:bidding_added')
     else:
         form = BiddingForm(request.user)
 

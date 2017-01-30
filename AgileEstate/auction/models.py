@@ -9,13 +9,12 @@ class BiddingModel(models.Model):
     estate_key = models.OneToOneField("estate.EstateModel", on_delete=models.CASCADE)
     owner_key = models.OneToOneField("users.UserProfile", default=3, on_delete=models.CASCADE,
                                      related_name="%(class)s_owner_user")
-    winner_key = models.OneToOneField("users.UserProfile", default=0,
+    winner_key = models.OneToOneField("users.UserProfile", default=3,
                                       on_delete=models.CASCADE,
                                       related_name="%(class)s_winner_user")
 
     start_time = models.DateTimeField(default=now())
-    end_time = models.DateTimeField(default=now()+timedelta(1),
-                                    validators=[MinValueValidator(start_time)])
+    end_time = models.DateTimeField(default=now()+timedelta(1))
     start_price = models.DecimalField(max_digits=902, decimal_places=2, default=Decimal(0.01),
                                       validators=[MinValueValidator( Decimal(0.01) )])
     actual_price = models.DecimalField(max_digits=902, decimal_places=2, default=start_price,
