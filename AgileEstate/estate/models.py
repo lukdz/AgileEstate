@@ -4,27 +4,12 @@ from decimal import Decimal
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 
-class Places:
-    _COUNTRIES = {"AFG" : "Afghanistan", "ALB" : "Albania", "CAN" : "Canada", "CHE" : "Switzerland",
-                 "DEU" : "Germany", "DZA" : "Algeria", "FRA" : "France", "GBR" : "United Kingdom",
-                 "HKG" : "Hong Kong", "JPN" : "Japan", "KOR" : "South Korea", "POL" : "Poland",
-                 "PRK" : "North Korea", "USA" : "United States of America"}
-
-    @classmethod
-    def get_sorted_items(cls):
-        return sorted(cls._COUNTRIES.items(), key=lambda pair: (pair[1], pair[0]))
-
-    def get_country_name(self, code):
-        return self._COUNTRIES[code]
-
-
 class EstateModel(models.Model):
     _VIEWS = {0 : "shit", 1 : "poor", 2 : "bad", 3 : "good", 4 : "nice", 5 : "great",
               6 : "awesome", 7 : "wonderful", 8 : "breath-taking", 9 : "paradise"}
 
     owner_key = models.OneToOneField("users.UserProfile", default=3, on_delete=models.CASCADE,
                                      related_name="%(class)s_owner_user")
-    country = models.CharField(max_length=3, choices=Places.get_sorted_items())
     longitude = models.IntegerField(default=0,
                                     validators=[MinValueValidator(-648000),
                                                 MaxValueValidator(648000)])

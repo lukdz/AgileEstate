@@ -5,13 +5,13 @@ from .models import EstateModel
 
 class EstateModelTestCase(TestCase):
     def __init__(self, *args, **kwargs):
-        self.model = None
         super(EstateModelTestCase, self).__init__(*args, **kwargs)
+        self.model = None
 
     def setUp(self):
         getcontext().prec = 4
-        self.model = EstateModel(country="POL", longitude=180900, latitude=41869,
-                                 surface=Decimal(1234.56), rooms=6, window_view=7)
+        self.model = EstateModel(longitude=180900, latitude=41869, surface=Decimal(1234.56),
+                                 rooms=6, window_view=7)
 
     def tearDown(self):
         pass

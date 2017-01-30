@@ -27,10 +27,6 @@ def estate_created(request):
     if request.method == 'GET':
         return render_to_response('estateCreated.html')
 
-def estate_details(request, estateid):
-    if request.method == 'GET':
-        return render_to_response('estateDetails.html')
-
 def estate_all(request):
     estates = EstateModel.objects.order_by('rooms')
     if request.method == 'GET':

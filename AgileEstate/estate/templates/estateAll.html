@@ -1,61 +1,69 @@
 <html>
 
 <head>
-	<title>Dostępne posiadłości</title>
-	<meta charset="utf-8">
-	<style type="text/css">
-		h1 {
-			color: white;
-			background-color: black;
-			padding: 0.1cm 0.5cm 0.1cm 0.5cm;
-			margin:0; }
-		body {
-			margin: 0;			
-			background-color: #f2f2f2 }
-		section	{
-			max-width: 900px; }
-		#estate {
-			margin: 0.5cm;	
-			padding: 0.1cm 0.5cm 0.1cm 0.5cm;		
-			background-color: white }
-		table#t01 th:nth-child(even) {
-			text-align: left;
-			width: 130px;
-		}
-		table#t01 th:nth-child(odd) {
-			font-weight: normal;
-		    	text-align: right;
-		}
-		#logo{
-		    	position: relative;
-			bottom: 40px;			
-			width:100px;
-			height:100px;
-		}
-	</style>
+    <title>Dostępne posiadłości</title>
+    <meta charset="utf-8">
+    <style type="text/css">
+        h1 {
+            color: white;
+            background-color: black;
+            padding: 0.1cm 0.5cm 0.1cm 0.5cm;
+            margin: 0;
+        }
+        
+        body {
+            margin: 0;
+            background-color: #f2f2f2
+        }
+        
+        section {
+            max-width: 900px;
+        }
+        
+        #estate {
+            margin: 0.5cm;
+            padding: 0.1cm 0.5cm 0.1cm 0.5cm;
+            background-color: white
+        }
+        
+        table#t01 th:nth-child(even) {
+            text-align: left;
+            width: 130px;
+        }
+        
+        table#t01 th:nth-child(odd) {
+            font-weight: normal;
+            text-align: right;
+        }
+        
+        #logo {
+            position: relative;
+            bottom: 40px;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
 </head>
 
 <body>
-	<header>
-		<h1>Dostępne posiadłości</h1>
-	</header>
-	
-	<section>
-		{% for estates in estates %}
-			<div id="estate">
-				<p>właściciel: 
-					<b>{{ estates.owner_key.firstname }}
+    <header>
+        <h1>Dostępne posiadłości</h1>
+    </header>
+
+    <section>
+        {% for estates in estates %}
+        <div id="estate">
+            <p>właściciel:
+                <b>{{ estates.owner_key.firstname }}
 					{{ estates.owner_key.lastname }} </b> </p>
-				<img 
-src="https://s-media-cache-ak0.pinimg.com/564x/30/93/d2/3093d2a63cf2a6d4d1a6a276676d7ae7.jpg" 
-id="logo" align="right">
-				<table id="t01">
-					<tr>
-						<th>powierzchnia: </th><th> {{ estates.surface }} m<sup>2</th>
-						<th>kraj: </th><th> {{ estates.country }}</th>
+            <img src="https://s-media-cache-ak0.pinimg.com/564x/30/93/d2/3093d2a63cf2a6d4d1a6a276676d7ae7.jpg" id="logo" align="right">
+            <table id="t01">
+                <tr>
+                    <th>powierzchnia: </th>
+                    <th> {{ estates.surface }} m<sup>2</th>
 					</tr>
 					<tr>
-						<th>liczba pokojów: </th><th> {{ estates.rooms }}</th>
+						<th>liczba pokoi: </th><th> {{ estates.rooms }}</th>
 						<th>długość geograficzna: </th>
 						<th> 	{{ estates.get_longitude.0 }}&deg
 							{{ estates.get_longitude.1 }}'
@@ -65,14 +73,14 @@ id="logo" align="right">
 						<th>ocena widoku z okna: </th>
 							<th> {{ estates.get_window_view_name }}</th>
 						<th>szerokość geograficzna: </th>
-						<th>	{{ estates.get_latitude.0 }}&deg 
-							{{ estates.get_latitude.1 }}' 
+						<th>	{{ estates.get_latitude.0 }}&deg
+							{{ estates.get_latitude.1 }}'
 							{{ estates.get_latitude.2 }}" </th>
 					</tr>
 				</table>
-					
-					
-					
+
+
+
 			</div>
 		{% endfor %}
 	</section>

@@ -7,9 +7,10 @@ from django.core.validators import MinValueValidator
 
 class BiddingModel(models.Model):
     estate_key = models.OneToOneField("estate.EstateModel", on_delete=models.CASCADE)
-    owner_key = models.OneToOneField("users.UserProfile", default=0, on_delete=models.CASCADE,
+    owner_key = models.OneToOneField("users.UserProfile", default=3, on_delete=models.CASCADE,
                                      related_name="%(class)s_owner_user")
-    winner_key = models.OneToOneField("users.UserProfile", default=0, on_delete=models.CASCADE,
+    winner_key = models.OneToOneField("users.UserProfile", default=0,
+                                      on_delete=models.CASCADE,
                                       related_name="%(class)s_winner_user")
 
     start_time = models.DateTimeField(default=now())

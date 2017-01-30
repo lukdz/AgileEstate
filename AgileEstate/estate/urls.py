@@ -7,5 +7,4 @@ urlpatterns = [
     url(r'^$', views.estate_all, name='estate_all'),
     url(r'^new/$', views.estate_new, name='estate_new'),
     url(r'^created/$', views.estate_created, name='estate_created'),
-    url(r'estate/(?P<estateid>[0-9]+)$', views.estate_details),
 ]
