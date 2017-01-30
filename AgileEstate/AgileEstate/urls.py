@@ -18,8 +18,8 @@ from django.contrib import admin
 from .views import main_page
 
 urlpatterns = [
-    url(r'^$', main_page),
-    url(r'^admin/', admin.site.urls),
+    url(r'^$', main_page, name='main_page'),
+    url(r'^admin/', admin.site.urls, name='admin'),
     url(r'^profile/', include("users.urls")),
     url(r'^estate/', include("estate.urls")),
     url(r'^bidding/', include("auction.urls")),
