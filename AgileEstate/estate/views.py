@@ -1,5 +1,4 @@
-from django.shortcuts import render, render_to_response
-from django.http import HttpResponseRedirect
+from django.shortcuts import render, render_to_response, redirect
 
 from .forms import EstateForm
 from .models import EstateModel
@@ -17,7 +16,7 @@ def estate_new(request):
             if not form.user.is_anonymous:
                 estate.owner_key = form.user
 
-            return HttpResponseRedirect('created/')
+            return redirect('estate:estate_created')
     else:
         form = EstateForm(request.user)
 

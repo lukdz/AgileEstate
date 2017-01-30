@@ -1,12 +1,159 @@
+<!DOCTYPE html>
 <html>
 
 <head>
+    <title>Add new estate</title>
+    <meta charset="utf-8" />
+    <style type="text/css">
+        header {
+            display: flex;
+            flex-direction: row;
+        }
+        
+        #title {
+            padding: 0.1cm 0.5cm 0.1cm 0.5cm;
+            margin: 0;
+            flex-grow: 4;
+            color: white;
+            background-color: black;
+        }
+        
+        #mainpage {
+            text-align: center;
+            padding: 0.1cm 0.5cm 0.1cm 0.5cm;
+            margin: 0;
+            flex-grow: 1;
+            background-color: mediumseagreen;
+        }
+        
+        body {
+            margin: 0;
+            background-color: #f2f2f2;
+        }
+        
+        form {
+            margin: 0.5cm;
+            padding: 0.5cm;
+            background-color: white
+        }
+        
+        .field {
+            padding: 5px;
+            background-color: darkgray;
+            border: 0.5px black solid;
+        }
+        
+        .entry {
+            display: flex;
+        }
+        
+        .errors {
+            color: red;
+        }
+        
+        .label {
+            width: 25%;
+            float: left;
+        }
+        
+        .inputs {
+            width: 75%;
+            float: left;
+        }
+        
+        .submit {
+            padding: 2%;
+            width: 20%;
+            border: 5px cornflowerblue outset;
+            color: black;
+            background-color: navajowhite;
+        }
+        
+        .submit:active {
+            border-style: inset;
+        }
+        
+        .info {
+            font-size: 2ex;
+        }
+    </style>
 </head>
 
 <body>
+    <header>
+        <h1 id="title">Add new estate</h1>
+        <h2 id="mainpage"><a href={% url 'main_page' %} id="link">MAIN PAGE</a></h2>
+    </header>
+
     <form action="" method="post">
-        {% csrf_token %} {{ form.as_ul }}
-        <input type="submit" value="Send message" />
+        {% csrf_token %} {{ form.non_field_errors }}
+        <div class="field">
+            <span class="errors">{{ form.surface.errors }}</span>
+            <div class="entry">
+                <div class="label">{{ form.surface.label_tag }}</div>
+                <div class="inputs">
+                    {{ form.surface }}
+                    <span class="info">m<sup>2</sup></span>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <span class="errors">{{ form.rooms.errors }}</span>
+            <div class="entry">
+                <div class="label">{{ form.rooms.label_tag }}</div>
+                <div class="inputs">{{ form.rooms }}</div>
+            </div>
+        </div>
+        <div class="field">
+            <span class="errors">{{ form.window_view.errors }}</span>
+            <div class="entry">
+                <div class="label">{{ form.window_view.label_tag }}</div>
+                <div class="inputs">{{ form.window_view }}</div>
+            </div>
+        </div>
+        <div class="field">
+            <span class="errors">{{ form.lat_degrees.errors }}</span>
+            <div class="entry">
+                <div class="label">{{ form.lat_degrees.label_tag }}</div>
+                <div class="inputs">{{ form.lat_degrees }}{{ form.lat_site }}</div>
+            </div>
+        </div>
+        <div class="field">
+            <span class="errors">{{ form.lat_minutes.errors }}</span>
+            <div class="entry">
+                <div class="label">{{ form.lat_minutes.label_tag }}</div>
+                <div class="inputs">{{ form.lat_minutes }}</div>
+            </div>
+        </div>
+        <div class="field">
+            <span class="errors">{{ form.lat_seconds.errors }}</span>
+            <div class="entry">
+                <div class="label">{{ form.lat_seconds.label_tag }}</div>
+                <div class="inputs">{{ form.lat_seconds }}</div>
+            </div>
+        </div>
+        <div class="field">
+            <span class="errors">{{ form.lng_degrees.errors }}</span>
+            <div class="entry">
+                <div class="label">{{ form.lng_degrees.label_tag }}</div>
+                <div class="inputs">{{ form.lng_degrees }}{{ form.lng_site }}</div>
+            </div>
+        </div>
+        <div class="field">
+            <span class="errors">{{ form.lng_minutes.errors }}</span>
+            <div class="entry">
+                <div class="label">{{ form.lng_minutes.label_tag }}</div>
+                <div class="inputs">{{ form.lng_minutes }}</div>
+            </div>
+        </div>
+        <div class="field">
+            <span class="errors">{{ form.lng_seconds.errors }}</span>
+            <div class="entry">
+                <div class="label">{{ form.lng_seconds.label_tag }}</div>
+                <div class="inputs">{{ form.lng_seconds }}</div>
+            </div>
+        </div>
+        <input class="submit" type="submit" value="ADD ESTATE" />
     </form>
 </body>
 
