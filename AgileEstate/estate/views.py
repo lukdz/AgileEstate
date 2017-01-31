@@ -30,3 +30,9 @@ def estate_all(request):
     estates = EstateModel.objects.order_by('rooms')
     if request.method == 'GET':
         return render_to_response('estateAll.html', {'estates': estates})
+
+def estate_selected(request, selected_id):
+    estates = EstateModel.objects.order_by('rooms')
+    x = int('0' + selected_id)
+    if request.method == 'GET':
+        return render_to_response('estateSelected.html', {'estates': estates, 'data': x})

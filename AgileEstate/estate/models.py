@@ -42,5 +42,14 @@ class EstateModel(models.Model):
         else:
             raise ArithmeticError("Incorrect values of latitude coordinates.")
 
+    def get_LatLng(self):
+	Lat_m  = float( self.latitude//3600 )
+	Lat_s  = float( (self.latitude//60)%60 )
+	Lat_ss = float( self.latitude%60 )
+	Lng_m  = float( self.longitude//3600 )
+	Lng_s  = float( (self.longitude//60)%60 )
+	Lng_ss = float( self.longitude%60 )
+        return Lat_m + Lat_s/60.0 + Lat_ss/60.0/60.0, Lng_m + Lng_s/60.0 + Lng_ss/60.0/60.0 
+
     def get_window_view_name(self):
         return self._VIEWS[self.window_view]
