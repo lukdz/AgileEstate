@@ -48,35 +48,35 @@
 
 <body>
     <header>
-        <h1>Dostępne posiadłości</h1>
+        <h1>Available property</h1>
     </header>
 
     <section>
         {% for estates in estates %}
         <div id="estate">
-            <p>właściciel:
+            <p>owner:
                 <b>{{ estates.owner_key.firstname }}
 					{{ estates.owner_key.lastname }} </b> </p>
             <img src="https://s-media-cache-ak0.pinimg.com/564x/30/93/d2/3093d2a63cf2a6d4d1a6a276676d7ae7.jpg" id="logo" align="right">
             <table id="t01">
                 <tr>
-                    <th>powierzchnia: </th>
+                    <th>surface: </th>
                     <th> {{ estates.surface }} m<sup>2</sup></th>
                 </tr>
                 <tr>
-                    <th>liczba pokoi: </th>
+                    <th>no. of rooms: </th>
                     <th> {{ estates.rooms }}</th>
-                    <th>długość geograficzna: </th>
+                    <th>longitude: </th>
                     <th> {{ estates.get_longitude.0 }}&deg {{ estates.get_longitude.1 }}' {{ estates.get_longitude.2 }}" </th>
                 </tr>
                 <tr>
-                    <th>ocena widoku z okna: </th>
+                    <th>view quality: </th>
                     <th> {{ estates.get_window_view_name }}</th>
-                    <th>szerokość geograficzna: </th>
+                    <th>latitude: </th>
                     <th> {{ estates.get_latitude.0 }}&deg {{ estates.get_latitude.1 }}' {{ estates.get_latitude.2 }}" </th>
                 </tr>
             </table>
-
+	<br>
 	<a href="http://127.0.0.1:8000/estate/selected/{{ forloop.counter }}">Details</a> 
 
 
