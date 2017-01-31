@@ -16,8 +16,7 @@ class BiddingForm(forms.ModelForm):
         self.fields["end_time"].label = "Ending time of auction"
         self.fields["start_price"].label = "Starting price"
         user_estates = EstateModel.objects.filter(owner_key=user.id) if not self.user.is_anonymous else EstateModel.objects.filter(owner_key=3)
-        estate_choice = list(map(lambda obj: (obj.id, obj.__str__()), user_estates))
-        # estate_choice = list(map(lambda obj: (obj.id, str(obj)), user_estates))
+        estate_choice = list(map(lambda obj: (obj.id, str(obj)), user_estates))
         self.fields["estate"] = forms.ChoiceField(widget=forms.Select, choices=estate_choice)
         self.fields["estate"].label = "Property"
 
