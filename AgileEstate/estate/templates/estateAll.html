@@ -1,9 +1,15 @@
+<!DOCTYPE html>
 <html>
 
 <head>
-    <title>AgileEstate</title>
-    <meta charset="utf-8">
+    <title>Available properties</title>
+    <meta charset="utf-8" />
     <style type="text/css">
+        body {
+            margin: 0;
+            background-color: #f2f2f2
+        }
+        
         header {
             display: flex;
             flex-direction: row;
@@ -17,17 +23,12 @@
             background-color: black;
         }
         
-        #login {
+        #mainpage {
             text-align: center;
             padding: 0.1cm 0.5cm 0.1cm 0.5cm;
             margin: 0;
             flex-grow: 1;
             background-color: lightgrey;
-        }
-        
-        body {
-            margin: 0;
-            background-color: #f2f2f2
         }
         
         section {
@@ -37,12 +38,24 @@
         #estate {
             margin: 0.5cm;
             padding: 0.1cm 0.5cm 0.1cm 0.5cm;
-            background-color: white;
+            background-color: white
         }
         
-        #link {
-            display: block;
-            line-height: 150%;
+        table#t01 th:nth-child(even) {
+            text-align: left;
+            width: 130px;
+        }
+        
+        table#t01 th:nth-child(odd) {
+            font-weight: normal;
+            text-align: right;
+        }
+        
+        #logo {
+            position: relative;
+            bottom: 40px;
+            width: 100px;
+            height: 100px;
         }
     </style>
     <script>
@@ -59,60 +72,47 @@
 
 <body>
     <header>
-        <h1 id="title">AgileEstate</h1>
-        <h3 id="login"><a href={% url 'users:login_user' %} id="link">SIGN IN</a></h3>
+        <h1 id="title">Available properties</h1>
+        <h3 id="mainpage"><a href={% url 'main_page' %} id="link">MAIN PAGE</a></h3>
     </header>
 
     <section>
+        {% for estates in estates %}
         <div id="estate">
-            <h3 id="greet">The world's largest agency for trade real estate.</h3>
-            <div>
-                <a href={% url 'estate:estate_all' %} id="link">View property</a>
-                <a href={% url 'estate:estate_new' %} id="link">Add property</a>
-            </div>
+            <p>owner:
+                <b>{{ estates.owner_key.firstname }}
+					{{ estates.owner_key.lastname }} </b> </p>
+            <img src="https://s-media-cache-ak0.pinimg.com/564x/30/93/d2/3093d2a63cf2a6d4d1a6a276676d7ae7.jpg" id="logo" align="right">
+            <table id="t01">
+                <tr>
+                    <th>surface: </th>
+                    <th> {{ estates.surface }} m<sup>2</sup></th>
+                </tr>
+                <tr>
+                    <th>no. of rooms: </th>
+                    <th> {{ estates.rooms }}</th>
+                    <th>longitude: </th>
+                    <th> {{ estates.get_longitude.0 }}&deg {{ estates.get_longitude.1 }}' {{ estates.get_longitude.2 }}" </th>
+                </tr>
+                <tr>
+                    <th>view quality: </th>
+                    <th> {{ estates.get_window_view_name }}</th>
+                    <th>latitude: </th>
+                    <th> {{ estates.get_latitude.0 }}&deg {{ estates.get_latitude.1 }}' {{ estates.get_latitude.2 }}" </th>
+                </tr>
+            </table>
+            <br/>
+
+            <a href=/estate/selected/{{ forloop.counter }} %} id="link">Details</a>
+
+
         </div>
+        {% endfor %}
     </section>
 
     <footer>
 
     </footer>
-</body>
-
-</html>
-<form action="" method="post">
-    {% csrf_token %} {{ form.non_field_errors }}
-    <div class="field">
-        <span class="errors">{{ form.start_time.errors }}</span>
-        <div class="entry">
-            <div class="label">{{ form.start_time.label_tag }}</div>
-            <div class="inputs">
-                {{ form.start_time }}
-                <span class="info">UTC</span>
-            </div>
-        </div>
-    </div>
-    <div class="field">
-        <span class="errors">{{ form.end_time.errors }}</span>
-        <div class="entry">
-            <div class="label">{{ form.end_time.label_tag }}</div>
-            <div class="inputs">
-                {{ form.end_time }}
-                <span class="info">UTC</span>
-            </div>
-        </div>
-    </div>
-    <div class="field">
-        <span class="errors">{{ form.start_price.errors }}</span>
-        <div class="entry">
-            <div class="label">{{ form.start_price.label_tag }}</div>
-            <div class="inputs">
-                {{ form.start_price }}
-                <span class="info">EUR</span>
-            </div>
-        </div>
-    </div>
-    <input class="submit" type="submit" value="Add bidding" />
-</form>
 </body>
 
 </html>
