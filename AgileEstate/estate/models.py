@@ -17,8 +17,8 @@ class EstateModel(models.Model):
                                    validators=[MinValueValidator(-324000),
                                                MaxValueValidator(324000)])
 
-    surface = models.DecimalField(max_digits=904, decimal_places=4, default=Decimal(0.0),
-                                  validators=[MinValueValidator( Decimal(0.0) )])
+    surface = models.DecimalField(max_digits=904, decimal_places=4, default=Decimal(1.0),
+                                  validators=[MinValueValidator( Decimal(1.0) )])
     rooms = models.PositiveIntegerField(validators=[MinValueValidator(1)])
     window_view = models.PositiveIntegerField(choices=sorted(_VIEWS.items()),
                                               validators=[MinValueValidator(0),
