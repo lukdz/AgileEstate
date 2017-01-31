@@ -44,6 +44,16 @@
             height: 100px;
         }
     </style>
+    <script>
+        function mainHref() {
+		var elem = document.getElementById("link");
+	    	if(typeof elem !== 'undefined' && elem !== null) {
+            		var x = document.getElementById("link").href;
+            		document.getElementById("link").href = window.location.href + x;
+	     	}
+        }
+        window.onload = mainHref();
+    </script>
 </head>
 
 <body>
@@ -77,7 +87,8 @@
                 </tr>
             </table>
 	<br>
-	<a href="http://127.0.0.1:8000/estate/selected/{{ forloop.counter }}">Details</a> 
+
+	<a href=/estate/selected/{{ forloop.counter }} %} id="link">Details</a>
 
 
         </div>
