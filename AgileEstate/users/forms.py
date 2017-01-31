@@ -9,9 +9,13 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password']
+        labels = {
+        'username': 'Username*',
+        'password': 'Password*'
+        }
 
 class UserProfileForm(forms.ModelForm):
 
     class Meta:
         model = UserProfile
-        fields = ['location','gender','firstname','lastname']
+        fields = ['gender','firstname','lastname']
