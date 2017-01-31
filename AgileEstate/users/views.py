@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.shortcuts import render
 from estate.models import EstateModel
-from .forms import UserForm
+from .forms import UserForm, UserProfileForm
 from .models import UserProfile
 
 
@@ -17,20 +17,34 @@ def index(request):
 
 
 def register(request):
-    form = UserForm(request.POST or None)
-    if form.is_valid():
-        user = form.save(commit=False)
-        username = form.cleaned_data['username']
-        password = form.cleaned_data['password']
+    userForm = UserForm(request.POST or None)
+    profileForm = UserProfileForm(request.POST or None)
+    if userForm.is_valid():
+        user = userForm.save(commit=False)
+        username = userForm.cleaned_data['username']
+        password = userForm.cleaned_data['password']
         user.set_password(password)
         user.save()
         user = authenticate(username=username, password=password)
+        if profileForm.is_valid():
+
+            gender = profileForm.cleaned_data['gender']
+            firstname = profileForm.cleaned_data['firstname']
+            lastname = profileForm.cleaned_data['lastname']
+            profile = UserProfile(user=user,gender=gender,firstname=firstname,lastname=lastname)
+            profile.save()
+
+        else:
+            profile = None
+
+        estates = EstateModel.objects.filter(owner_key=profile)
         if user is not None:
             if user.is_active:
                 login(request, user)
-                return render(request, 'profile/profile.html')
+                return render(request, 'profile/user_profile.html', {"user":user,"profile":profile,"estates":estates})
     context = {
-        "form": form,
+        "userForm": userForm,
+        "profileForm": profileForm
     }
     return render(request, 'profile/register.html', context)
 

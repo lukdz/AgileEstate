@@ -9,7 +9,7 @@
         <div class="col-sm-12 col-md-6">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h3>Logowanie</h3>
+                    <h3>Log in</h3>
                     <form class="form-horizontal" role="form" action="{% url 'users:login_user'%}" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="form-group">
@@ -30,13 +30,13 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-success">Zaloguj</button>
+                                <button type="submit" class="btn btn-success">Log in</button>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="panel-footer">
-                    Jeszcze nie masz konta? <a href="{% url 'users:register' %}">Klinij tutaj</a> aby się zarejestrować.
+                    Don't have an account yet? <a href="{% url 'users:register' %}">Click here</a> to register.
                 </div>
             </div>
         </div>
