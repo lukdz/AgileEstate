@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Available biddings</title>
+    <meta charset="utf-8" />
+    <style type="text/css">
+        body {
+            margin: 0;
+            background-color: #f2f2f2
+        }
+        
+        header {
+            display: flex;
+            flex-direction: row;
+        }
+        
+        #title {
+            padding: 0.1cm 0.5cm 0.1cm 0.5cm;
+            margin: 0;
+            flex-grow: 4;
+            color: white;
+            background-color: black;
+        }
+        
+        #mainpage {
+            text-align: center;
+            padding: 0.1cm 0.5cm 0.1cm 0.5cm;
+            margin: 0;
+            flex-grow: 1;
+            background-color: lightgrey;
+        }
+        
+        section {
+            max-width: 900px;
+        }
+        
+        #auction {
+            margin: 0.5cm;
+            padding: 0.1cm 0.5cm 0.1cm 0.5cm;
+            background-color: white
+        }
+        
+        table#t01 th:nth-child(even) {
+            text-align: left;
+            width: 130px;
+        }
+        
+        table#t01 th:nth-child(odd) {
+            font-weight: normal;
+            text-align: right;
+        }
+        
+        #logo {
+            position: relative;
+            bottom: 40px;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+    <script>
+        function mainHref() {
+            var elem = document.getElementById("link");
+            if (typeof elem !== 'undefined' && elem !== null) {
+                var x = document.getElementById("link").href;
+                document.getElementById("link").href = window.location.href + x;
+            }
+        }
+        window.onload = mainHref();
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1 id="title">Available biddings</h1>
+        <h3 id="mainpage"><a href={% url 'main_page' %} id="link">MAIN PAGE</a></h3>
+    </header>
+
+    <section>
+        {% for biddings in biddings %}
+        <div id="auction">
+            <p>seller:
+                <b>{{ biddings.owner_key.firstname }}
+					{{ biddings.owner_key.lastname }} </b> </p>
+            <img src="https://s-media-cache-ak0.pinimg.com/564x/30/93/d2/3093d2a63cf2a6d4d1a6a276676d7ae7.jpg" id="logo" align="right">
+            <table id="t01">
+                <tr>
+                    <th>property: </th>
+                    <th> <a href=/estate id="link">details</a> </th>
+                </tr>
+                <tr>
+                    <th>beginning time: </th>
+                    <th> {{ biddings.start_time }} UTC</th>
+                    <th>ending time: </th>
+                    <th> {{ biddings.end_time }} UTC</th>
+                </tr>
+                <tr>
+                    <th>start price: </th>
+                    <th> {{ biddings.start_price }} USD</th>
+                    <th>actual price: </th>
+                    <th> {{ biddings.actual_price }} USD </th>
+                </tr>
+            </table>
+            <br/>
+        </div>
+        {% endfor %}
+    </section>
+
+    <footer>
+
+    </footer>
+</body>
+
+</html>
