@@ -50,11 +50,7 @@ def register(request):
 
 def logout_user(request):
     logout(request)
-    form = UserForm(request.POST or None)
-    context = {
-        "form": form,
-    }
-    return render(request, 'profile/login.html', context)
+    return render(request, 'main.html')
 
 
 def login_user(request):

@@ -21,7 +21,16 @@
                 <li class="{% block register_active %}{% endblock %}"><a href="{% url 'users:register' %}">Rejestracja</a></li>
                 <li class="{% block login_active %}{% endblock %}"><a href="{% url 'users:login_user' %}">Logowanie</a></li>
             </ul>
+            <ul class="nav navbar-nav navbar-right">
+                 <li>
+                     <a href="{% url 'users:logout_user' %}">
+                         <span aria-hidden="true"></span>&nbsp; Strona glówna
+                     </a>
+                 </li>
+             </ul>
         </div>
+
+
 
     </div>
 </nav>
