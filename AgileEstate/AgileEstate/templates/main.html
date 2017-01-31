@@ -47,8 +47,11 @@
     </style>
     <script>
         function mainHref() {
-            var x = document.getElementById("link").href;
-            document.getElementById("link").href = window.location.href + x;
+		var elem = document.getElementById("link");
+	    	if(typeof elem !== 'undefined' && elem !== null) {
+            		var x = document.getElementById("link").href;
+            		document.getElementById("link").href = window.location.href + x;
+	     	}
         }
         window.onload = mainHref();
     </script>
@@ -63,7 +66,7 @@
     <section>
         <div id="estate">
             <h3 id="greet">Największa na świecie agencja zajmująca się handlem nieruchomościami.</h3>
-            <div id="links">
+            <div>
                 <a href={% url 'estate:estate_all' %} id="link">Wyświetl posiadłości</a>
                 <a href={% url 'estate:estate_new' %} id="link">Dodaj posiadłość</a>
             </div>
