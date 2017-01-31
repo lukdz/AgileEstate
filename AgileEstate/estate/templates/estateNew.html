@@ -5,11 +5,16 @@
     <title>Add new estate</title>
     <meta charset="utf-8" />
     <style type="text/css">
+        body {
+            margin: 0;
+            background-color: #f2f2f2;
+        }
+
         header {
             display: flex;
             flex-direction: row;
         }
-        
+
         #title {
             padding: 0.1cm 0.5cm 0.1cm 0.5cm;
             margin: 0;
@@ -17,50 +22,45 @@
             color: white;
             background-color: black;
         }
-        
+
         #mainpage {
             text-align: center;
             padding: 0.1cm 0.5cm 0.1cm 0.5cm;
             margin: 0;
             flex-grow: 1;
-            background-color: mediumseagreen;
+            background-color: lightgrey;
         }
-        
-        body {
-            margin: 0;
-            background-color: #f2f2f2;
-        }
-        
+
         form {
             margin: 0.5cm;
             padding: 0.5cm;
             background-color: white
         }
-        
+
         .field {
             padding: 5px;
             background-color: darkgray;
             border: 0.5px black solid;
         }
-        
+
         .entry {
             display: flex;
         }
-        
+
         .errors {
             color: red;
         }
-        
+
         .label {
             width: 25%;
             float: left;
         }
-        
+
         .inputs {
             width: 75%;
             float: left;
         }
-        
+
         .submit {
             padding: 2%;
             width: 20%;
@@ -68,11 +68,11 @@
             color: black;
             background-color: navajowhite;
         }
-        
+
         .submit:active {
             border-style: inset;
         }
-        
+
         .info {
             font-size: 2ex;
         }
@@ -81,8 +81,8 @@
 
 <body>
     <header>
-        <h1 id="title">Add new estate</h1>
-        <h2 id="mainpage"><a href={% url 'main_page' %} id="link">MAIN PAGE</a></h2>
+        <h1 id="title">Add new property</h1>
+        <h3 id="mainpage"><a href={% url 'main_page' %} id="link">MAIN PAGE</a></h3>
     </header>
 
     <form action="" method="post">

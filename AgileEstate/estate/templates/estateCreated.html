@@ -1,10 +1,52 @@
+<!DOCTYPE html>
 <html>
 
 <head>
+    <title>Add new estate</title>
+    <meta charset="utf-8" />
+    <style type="text/css">
+        h1 {
+            padding: 0.1cm 0.5cm 0.1cm 0.5cm;
+            margin: 0;
+            color: white;
+            background-color: black;
+        }
+        
+        body {
+            margin: 0;
+            background-color: #f2f2f2;
+        }
+        
+        section {
+            margin: 0.5cm;
+        }
+        
+        #info {
+            padding: 5% 10%;
+            color: dodgerblue;
+            background-color: lightgray;
+            font: 2em monospace;
+        }
+        
+        #return {
+            display: block;
+            padding: 3%;
+            width: 15%;
+            border: 5px cornflowerblue outset;
+            color: black;
+            background-color: navajowhite;
+        }
+    </style>
 </head>
 
 <body>
-    <h2>YOU'VE SUCCESSFULLY ADDED NEW ESTATE</h2>
+    <header>
+        <h1 id="title">Success</h1>
+    </header>
+    <section>
+        <h2 id="info">YOU'VE SUCCESSFULLY ADDED NEW PROPERTY.</h2>
+        <a id="return" href={% url 'main_page' %} id="link">Return to main page</a>
+    </section>
 </body>
 
 </html>
