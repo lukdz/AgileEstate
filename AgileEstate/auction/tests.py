@@ -6,7 +6,7 @@ from .models import BiddingModel
 
 class BiddingModelTestCase(TestCase):
     def __init__(self, *args, **kwargs):
-        super(EstateModelTestCase, self).__init__(*args, **kwargs)
+        super(BiddingModelTestCase, self).__init__(*args, **kwargs)
         self.model = None
 
     def setUp(self):
