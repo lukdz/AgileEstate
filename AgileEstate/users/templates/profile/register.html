@@ -12,7 +12,13 @@
                     <h3>Zarejestruj nowe konto</h3>
                     <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
-                        {% for field in form %}
+                        {% for field in userForm %}
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="user_name">{{ field.label_tag }}</label>
+                                <div class="col-sm-10">{{ field }}</div>
+                            </div>
+                        {% endfor %}
+                        {% for field in profileForm %}
                             <div class="form-group">
                                 <label class="control-label col-sm-2" for="user_name">{{ field.label_tag }}</label>
                                 <div class="col-sm-10">{{ field }}</div>
@@ -20,13 +26,13 @@
                         {% endfor %}
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-success">Wyślij</button>
+                                <button type="submit" class="btn btn-success">Zarejestruj</button>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="panel-footer">
-                    Masz już konto? <a href="{% url 'users:login_user' %}">Kliknij tutaj</a> aby się zalogować.
+                    Już masz konto? <a href="{% url 'users:login_user' %}">Kliknij tutaj</a> By się zalogować.
                 </div>
             </div>
         </div>
