@@ -69,7 +69,6 @@
     <section>
         {% for estates in estates %} {% if forloop.counter == data %}
 
-
         <div id="estate">
             <p>owner:
                 <b>{{ estates.owner_key.firstname }}
@@ -101,15 +100,7 @@
 
                 function myMap() {
                     var mapProp = {
-                        center: new google.maps.LatLng({
-                            {
-                                estates.get_LatLng .0
-                            }
-                        }, {
-                            {
-                                estates.get_LatLng .1
-                            }
-                        }),
+                        center: new google.maps.LatLng({{ estates.get_LatLng.0 }}, {{ estates.get_LatLng.1 }}),
                         zoom: 11,
                         disableDoubleClickZoom: true,
                     };
@@ -120,16 +111,8 @@
                     });
 
                     var myLatLng = {
-                        lat: {
-                            {
-                                estates.get_LatLng .0
-                            }
-                        },
-                        lng: {
-                            {
-                                estates.get_LatLng .1
-                            }
-                        }
+                        lat: {{estates.get_LatLng.0}},
+                        lng: {{estates.get_LatLng.1}}
                     };
                     var marker = new google.maps.Marker({
                         position: myLatLng,
