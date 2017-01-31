@@ -1,8 +1,10 @@
 from django.shortcuts import render, render_to_response, redirect
+from django.contrib.auth.decorators import login_required
 
 from .forms import EstateForm
 from .models import EstateModel
 
+#@login_required(login_url='users:login_user')
 def estate_new(request):
     if request.method == 'POST':
         form = EstateForm(request.user, request.POST)
@@ -15,6 +17,8 @@ def estate_new(request):
 
             if not form.user.is_anonymous:
                 estate.owner_key = form.user
+
+            form.save(commit=True)
 
             return redirect('estate:estate_created')
     else:
@@ -33,6 +37,6 @@ def estate_all(request):
 
 def estate_selected(request, selected_id):
     estates = EstateModel.objects.order_by('rooms')
-    x = int('0' + selected_id)
+    data = int('0' + selected_id)
     if request.method == 'GET':
-        return render_to_response('estateSelected.html', {'estates': estates, 'data': x})
+        return render_to_response('estateSelected.html', {'estates': estates, 'data': data})

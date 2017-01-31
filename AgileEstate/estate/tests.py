@@ -28,6 +28,11 @@ class EstateModelTestCase(TestCase):
         self.assertEquals(result[1], 37)
         self.assertEquals(result[2], 49)
 
+    def test_get_LatLng(self):
+        result = self.model.get_LatLng()
+        self.assertEquals(result[0], 11+37/60.0+49/3600.0)
+        self.assertEquals(result[1], 50+15/60.0)
+
     def test_set_longitude_correct(self):
         self.model.set_longitude(52, 18, 30)
         result = self.model.longitude

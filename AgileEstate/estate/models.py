@@ -8,8 +8,8 @@ class EstateModel(models.Model):
     _VIEWS = {0 : "shit", 1 : "poor", 2 : "bad", 3 : "good", 4 : "nice", 5 : "great",
               6 : "awesome", 7 : "wonderful", 8 : "breath-taking", 9 : "paradise"}
 
-    owner_key = models.OneToOneField("users.UserProfile", default=3, on_delete=models.CASCADE,
-                                     related_name="%(class)s_owner_user")
+    owner_key = models.ForeignKey("users.UserProfile", default=3, on_delete=models.CASCADE,
+                                  related_name="%(class)s_owner_user")
     longitude = models.IntegerField(default=0,
                                     validators=[MinValueValidator(-648000),
                                                 MaxValueValidator(648000)])
@@ -43,13 +43,10 @@ class EstateModel(models.Model):
             raise ArithmeticError("Incorrect values of latitude coordinates.")
 
     def get_LatLng(self):
-	Lat_m  = float( self.latitude//3600 )
-	Lat_s  = float( (self.latitude//60)%60 )
-	Lat_ss = float( self.latitude%60 )
-	Lng_m  = float( self.longitude//3600 )
-	Lng_s  = float( (self.longitude//60)%60 )
-	Lng_ss = float( self.longitude%60 )
-        return Lat_m + Lat_s/60.0 + Lat_ss/60.0/60.0, Lng_m + Lng_s/60.0 + Lng_ss/60.0/60.0 
+        Lat_deg, Lat_min, Lat_sec = self.get_latitude()
+        Lng_deg, Lng_min, Lng_sec = self.get_longitude()
+
+        return Lat_deg+Lat_min/60.0+Lat_sec/3600.0, Lng_deg+Lng_min/60.0+Lng_sec/3600.0
 
     def get_window_view_name(self):
         return self._VIEWS[self.window_view]
