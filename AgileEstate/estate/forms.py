@@ -21,7 +21,7 @@ class EstateForm(forms.ModelForm):
         self.user = user
         self.fields["surface"].label = "Surface"
         self.fields["rooms"].label = "Number of rooms"
-        self.fields["window_view"].label = "Window view rate"
+        self.fields["window_view"].label = "Window view quality"
 
     def clean_lat_degrees(self):
         cd_lat_degrees = self.cleaned_data["lat_degrees"]

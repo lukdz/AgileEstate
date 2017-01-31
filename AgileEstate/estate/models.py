@@ -24,6 +24,11 @@ class EstateModel(models.Model):
                                               validators=[MinValueValidator(0),
                                                           MaxValueValidator(9)])
 
+    def __str__(self):
+        return "surface: "+str(float(self.surface))+"; rooms: "+str(self.rooms)+ \
+               "; window view: "+self._VIEWS[self.window_view]+"; latitude: "+ \
+               str(self.get_latitude())+"; longitude: "+str(self.get_longitude())
+
     def get_longitude(self):
         return self.longitude//3600, (self.longitude//60)%60, self.longitude%60
 
