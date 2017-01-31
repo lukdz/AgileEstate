@@ -20,7 +20,7 @@ from .views import main_page
 urlpatterns = [
     url(r'^$', main_page, name='main_page'),
     url(r'^admin/', admin.site.urls, name='admin'),
-    url(r'^profile/', include("users.urls")),
-    url(r'^estate/', include("estate.urls")),
-    url(r'^bidding/', include("auction.urls")),
+    url(r'^profile/', include("users.urls", namespace="users")),
+    url(r'^estate/', include("estate.urls", namespace="estate")),
+    url(r'^bidding/', include("auction.urls", namespace="auction")),
 ]
