@@ -61,6 +61,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
+	BASE_DIR + '/AgileEstate/templates/',
         BASE_DIR + '/users/templates/',
         BASE_DIR + '/auction/templates/',
         BASE_DIR + '/estate/templates/',

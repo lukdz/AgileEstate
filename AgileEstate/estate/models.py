@@ -4,24 +4,12 @@ from decimal import Decimal
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 
-class Places:
-    _COUNTRIES = {"AFG" : "Afghanistan", "ALB" : "Albania", "CAN" : "Canada", "CHE" : "Switzerland",
-                 "DEU" : "Germany", "DZA" : "Algeria", "FRA" : "France", "GBR" : "United Kingdom",
-                 "HKG" : "Hong Kong", "JPN" : "Japan", "KOR" : "South Korea", "POL" : "Poland",
-                 "PRK" : "North Korea", "USA" : "United States of America"}
-
-    @classmethod
-    def get_sorted_items(cls):
-        return sorted(cls._COUNTRIES.items(), key=lambda pair: (pair[1], pair[0]))
-
-
 class EstateModel(models.Model):
     _VIEWS = {0 : "shit", 1 : "poor", 2 : "bad", 3 : "good", 4 : "nice", 5 : "great",
               6 : "awesome", 7 : "wonderful", 8 : "breath-taking", 9 : "paradise"}
 
     owner_key = models.OneToOneField("users.UserProfile", default=3, on_delete=models.CASCADE,
                                      related_name="%(class)s_owner_user")
-    country = models.CharField(max_length=3, choices=Places.get_sorted_items())
     longitude = models.IntegerField(default=0,
                                     validators=[MinValueValidator(-648000),
                                                 MaxValueValidator(648000)])
@@ -31,25 +19,37 @@ class EstateModel(models.Model):
 
     surface = models.DecimalField(max_digits=904, decimal_places=4, default=Decimal(0.0),
                                   validators=[MinValueValidator( Decimal(0.0) )])
-    rooms = models.PositiveIntegerField(validators=[MinValueValidator(3)])
-    window_view = models.PositiveIntegerField(max_length=15, choices=sorted(_VIEWS.items()),
-                                   validators=[MinValueValidator(0), MaxValueValidator(9)])
+    rooms = models.PositiveIntegerField(validators=[MinValueValidator(1)])
+    window_view = models.PositiveIntegerField(choices=sorted(_VIEWS.items()),
+                                              validators=[MinValueValidator(0),
+                                                          MaxValueValidator(9)])
 
     def get_longitude(self):
         return self.longitude//3600, (self.longitude//60)%60, self.longitude%60
 
-    def count_longitude(self, degs, mins, secs):
+    def set_longitude(self, degs, mins, secs):
         if -180 <= degs <= 180 and 0 <= mins <= 60 and 0 <= secs <= 60:
-            return degs*3600+mins*60+secs
+            self.longitude = degs*3600+mins*60+secs
         else:
             raise ArithmeticError("Incorrect values of longitude coordinates.")
 
-    def get_latitude(self, latitude):
+    def get_latitude(self):
         return self.latitude//3600, (self.latitude//60)%60, self.latitude%60
 
-    def count_latitude(self, degs, mins, secs):
+    def set_latitude(self, degs, mins, secs):
         if -90 <= degs <= 90 and 0 <= mins <= 60 and 0 <= secs <= 60:
-            return degs*3600+mins*60+secs
+            self.latitude =  degs*3600+mins*60+secs
         else:
             raise ArithmeticError("Incorrect values of latitude coordinates.")
 
+    def get_LatLng(self):
+	Lat_m  = float( self.latitude//3600 )
+	Lat_s  = float( (self.latitude//60)%60 )
+	Lat_ss = float( self.latitude%60 )
+	Lng_m  = float( self.longitude//3600 )
+	Lng_s  = float( (self.longitude//60)%60 )
+	Lng_ss = float( self.longitude%60 )
+        return Lat_m + Lat_s/60.0 + Lat_ss/60.0/60.0, Lng_m + Lng_s/60.0 + Lng_ss/60.0/60.0 
+
+    def get_window_view_name(self):
+        return self._VIEWS[self.window_view]
