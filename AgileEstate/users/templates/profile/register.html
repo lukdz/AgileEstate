@@ -9,7 +9,7 @@
         <div class="col-sm-12 col-md-6">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h3>Register new account</h3>
+                    <h3>Zarejestruj nowe konto</h3>
                     <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         {% for field in userForm %}
@@ -26,13 +26,13 @@
                         {% endfor %}
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-success">Send</button>
+                                <button type="submit" class="btn btn-success">Zarejestruj</button>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="panel-footer">
-                    Already have an account? <a href="{% url 'users:login_user' %}">Click here</a> to log in.
+                    Już masz konto? <a href="{% url 'users:login_user' %}">Kliknij tutaj</a> By się zalogować.
                 </div>
             </div>
         </div>

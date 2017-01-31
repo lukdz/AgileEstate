@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Profile page</title>
+    <title>Strona profilu</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 </head>
 <body>
@@ -18,8 +18,8 @@
 
         <div class="collapse navbar-collapse" id="topNavBar">
             <ul class="nav navbar-nav">
-                <li class="{% block register_active %}{% endblock %}"><a href="{% url 'users:register' %}">Register</a></li>
-                <li class="{% block login_active %}{% endblock %}"><a href="{% url 'users:login_user' %}">Log in</a></li>
+                <li class="{% block register_active %}{% endblock %}"><a href="{% url 'users:register' %}">Rejestracja</a></li>
+                <li class="{% block login_active %}{% endblock %}"><a href="{% url 'users:login_user' %}">Logowanie</a></li>
             </ul>
         </div>
 
