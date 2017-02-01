@@ -3,7 +3,6 @@ decorator==4.0.6
 dj-database-url==0.4.2
 Django==1.8.7
 gunicorn==19.4.5
-gyp==0.1
 numpy==1.11.0
 Pillow==3.4.2
 psycopg2==2.6.1
