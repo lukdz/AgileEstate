@@ -84,6 +84,8 @@ WSGI_APPLICATION = 'AgileEstate.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
 
+DATABASES = {'default': {}}
+
 if DEBUG:
     if TEST:
 	# lokalna baza danych do testow na komputerach domowych
