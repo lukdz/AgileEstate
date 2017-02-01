@@ -4,9 +4,11 @@
     <title>AgileEstate</title>
     <meta charset="utf-8">
     <style type="text/css">
+	@import url('https://fonts.googleapis.com/css?family=Lato');
         header {
             display: flex;
             flex-direction: row;
+            font-family: 'Lato', sans-serif;
         }
         
         #title {
@@ -15,6 +17,7 @@
             flex-grow: 4;
             color: white;
             background-color: black;
+	    
         }
         
         #login {
@@ -22,16 +25,18 @@
             padding: 0.1cm 0.5cm 0.1cm 0.5cm;
             margin: 0;
             flex-grow: 1;
-            background-color: mediumseagreen;
+            background-color: lightgrey;
         }
         
         body {
             margin: 0;
             background-color: #f2f2f2
+	    
         }
         
         section {
             max-width: 900px;
+            font-family: 'Lato', sans-serif;
         }
         
         #estate {
@@ -47,11 +52,11 @@
     </style>
     <script>
         function mainHref() {
-		var elem = document.getElementById("link");
-	    	if(typeof elem !== 'undefined' && elem !== null) {
-            		var x = document.getElementById("link").href;
-            		document.getElementById("link").href = window.location.href + x;
-	     	}
+            var elem = document.getElementById("link");
+            if (typeof elem !== 'undefined' && elem !== null) {
+                var x = document.getElementById("link").href;
+                document.getElementById("link").href = window.location.href + x;
+            }
         }
         window.onload = mainHref();
     </script>
@@ -60,15 +65,20 @@
 <body>
     <header>
         <h1 id="title">AgileEstate</h1>
-        <h2 id="login"><a href={% url 'users:login_user' %} id="link">SIGN IN</a></h2>
+        <h3 id="login"><a href={% url 'users:login_user' %} id="link">SIGN IN</a></h3>
     </header>
 
     <section>
         <div id="estate">
             <h3 id="greet">The world's largest agency for trade real estate.</h3>
-            <div>
+            <div id="estatelinks">
                 <a href={% url 'estate:estate_all' %} id="link">View property</a>
                 <a href={% url 'estate:estate_new' %} id="link">Add property</a>
+            </div>
+	    <br>
+            <div id="auctionlinks">
+                <a href={% url 'auction:bidding_all' %} id="link">View auctions</a>
+                <a href={% url 'auction:bidding_new' %} id="link">Add bidding</a>
             </div>
         </div>
     </section>

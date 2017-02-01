@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import EstateForm
 from .models import EstateModel
 
-#@login_required(login_url='users:login_user')
+@login_required(login_url='users:login_user')
 def estate_new(request):
     if request.method == 'POST':
         form = EstateForm(request.user, request.POST)

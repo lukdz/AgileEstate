@@ -5,6 +5,7 @@
     <title>Property details</title>
     <meta charset="utf-8" />
     <style type="text/css">
+	@import url('https://fonts.googleapis.com/css?family=Lato');
         body {
             margin: 0;
             background-color: #f2f2f2
@@ -13,6 +14,7 @@
         header {
             display: flex;
             flex-direction: row;
+	    font-family: 'Lato', sans-serif;
         }
         
         #title {
@@ -33,6 +35,7 @@
         
         section {
             max-width: 900px;
+	    font-family: 'Lato', sans-serif;
         }
         
         #estate {
@@ -69,7 +72,6 @@
     <section>
         {% for estates in estates %} {% if forloop.counter == data %}
 
-
         <div id="estate">
             <p>owner:
                 <b>{{ estates.owner_key.firstname }}
@@ -101,16 +103,8 @@
 
                 function myMap() {
                     var mapProp = {
-                        center: new google.maps.LatLng({
-                            {
-                                estates.get_LatLng .0
-                            }
-                        }, {
-                            {
-                                estates.get_LatLng .1
-                            }
-                        }),
-                        zoom: 11,
+                        center: new google.maps.LatLng({{ estates.get_LatLng.0 }}, {{ estates.get_LatLng.1 }}),
+                        zoom: 6,
                         disableDoubleClickZoom: true,
                     };
                     map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
@@ -120,16 +114,8 @@
                     });
 
                     var myLatLng = {
-                        lat: {
-                            {
-                                estates.get_LatLng .0
-                            }
-                        },
-                        lng: {
-                            {
-                                estates.get_LatLng .1
-                            }
-                        }
+                        lat: {{estates.get_LatLng.0}},
+                        lng: {{estates.get_LatLng.1}}
                     };
                     var marker = new google.maps.Marker({
                         position: myLatLng,

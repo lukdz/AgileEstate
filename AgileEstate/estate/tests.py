@@ -16,6 +16,10 @@ class EstateModelTestCase(TestCase):
     def tearDown(self):
         pass
 
+    def test_str(self):
+        result = str(self.model)
+        self.assertEquals(result, "surface: 1234.56; rooms: 6; window view: wonderful; latitude: (11, 37, 49); longitude: (50, 15, 0)")
+
     def test_get_longitude(self):
         result = self.model.get_longitude()
         self.assertEquals(result[0], 50)

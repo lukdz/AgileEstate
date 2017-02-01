@@ -2,12 +2,35 @@
 <html>
 
 <head>
-    <title>Add new estate</title>
+    <title>Add new bidding</title>
     <meta charset="utf-8" />
     <style type="text/css">
+	@import url('https://fonts.googleapis.com/css?family=Lato');
         body {
             margin: 0;
             background-color: #f2f2f2;
+        }
+        
+        header {
+            display: flex;
+            flex-direction: row;
+	    font-family: 'Lato', sans-serif;
+        }
+        
+        #title {
+            padding: 0.1cm 0.5cm 0.1cm 0.5cm;
+            margin: 0;
+            flex-grow: 4;
+            color: white;
+            background-color: black;
+        }
+        
+        #mainpage {
+            text-align: center;
+            padding: 0.1cm 0.5cm 0.1cm 0.5cm;
+            margin: 0;
+            flex-grow: 1;
+            background-color: lightgrey;
         }
         
         form {
@@ -16,17 +39,11 @@
             background-color: white
         }
         
-        h1 {
-            color: white;
-            background-color: black;
-            padding: 0.1cm 0.5cm 0.1cm 0.5cm;
-            margin: 0;
-        }
-        
         .field {
             padding: 5px;
             background-color: darkgray;
             border: 0.5px black solid;
+	    font-family: 'Lato', sans-serif;
         }
         
         .entry {
@@ -53,6 +70,7 @@
             border: 5px cornflowerblue outset;
             color: black;
             background-color: navajowhite;
+	    font-family: 'Lato', sans-serif;
         }
         
         .submit:active {
@@ -67,11 +85,19 @@
 
 <body>
     <header>
-        <h1>Add new estate</h1>
+        <h1 id="title">Add new bidding</h1>
+        <h3 id="mainpage"><a href={% url 'main_page' %} id="link">MAIN PAGE</a></h3>
     </header>
 
     <form action="" method="post">
         {% csrf_token %} {{ form.non_field_errors }}
+        <div class="field">
+            <span class="errors">{{ form.estate.errors }}</span>
+            <div class="entry">
+                <div class="label">{{ form.estate.label_tag }}</div>
+                <div class="inputs">{{ form.estate }}</div>
+            </div>
+        </div>
         <div class="field">
             <span class="errors">{{ form.start_time.errors }}</span>
             <div class="entry">
@@ -98,7 +124,7 @@
                 <div class="label">{{ form.start_price.label_tag }}</div>
                 <div class="inputs">
                     {{ form.start_price }}
-                    <span class="info">EUR</span>
+                    <span class="info">USD</span>
                 </div>
             </div>
         </div>

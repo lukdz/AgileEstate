@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Available properties</title>
+    <title>Available biddings</title>
     <meta charset="utf-8" />
     <style type="text/css">
 	@import url('https://fonts.googleapis.com/css?family=Lato');
@@ -38,7 +38,7 @@
 	    font-family: 'Lato', sans-serif;
         }
         
-        #estate {
+        #auction {
             margin: 0.5cm;
             padding: 0.1cm 0.5cm 0.1cm 0.5cm;
             background-color: white
@@ -75,40 +75,37 @@
 
 <body>
     <header>
-        <h1 id="title">Available properties</h1>
+        <h1 id="title">Available biddings</h1>
         <h3 id="mainpage"><a href={% url 'main_page' %} id="link">MAIN PAGE</a></h3>
     </header>
 
     <section>
-        {% for estates in estates %}
-        <div id="estate">
-            <p>owner:
-                <b>{{ estates.owner_key.firstname }}
-					{{ estates.owner_key.lastname }} </b> </p>
+	<h3>&nbsp;&nbsp;&nbsp;&nbsp;<a href=/estate id="link">View all property details</a></h3>
+        {% for biddings in biddings %}
+        <div id="auction">
+            <p>seller:
+                <b>{{ biddings.owner_key.firstname }}
+					{{ biddings.owner_key.lastname }} </b> </p>
             <img src="https://s-media-cache-ak0.pinimg.com/564x/30/93/d2/3093d2a63cf2a6d4d1a6a276676d7ae7.jpg" id="logo" align="right">
             <table id="t01">
                 <tr>
-                    <th>surface: </th>
-                    <th> {{ estates.surface }} m<sup>2</sup></th>
+                    <th>property: </th>
+                    <th> <a href=/estate/selected/{{ forloop.counter }} id="link">details</a> </th>
                 </tr>
                 <tr>
-                    <th>no. of rooms: </th>
-                    <th> {{ estates.rooms }}</th>
-                    <th>longitude: </th>
-                    <th> {{ estates.get_longitude.0 }}&deg {{ estates.get_longitude.1 }}' {{ estates.get_longitude.2 }}" </th>
+                    <th>beginning time: </th>
+                    <th> {{ biddings.start_time }} UTC</th>
+                    <th>ending time: </th>
+                    <th> {{ biddings.end_time }} UTC</th>
                 </tr>
                 <tr>
-                    <th>view quality: </th>
-                    <th> {{ estates.get_window_view_name }}</th>
-                    <th>latitude: </th>
-                    <th> {{ estates.get_latitude.0 }}&deg {{ estates.get_latitude.1 }}' {{ estates.get_latitude.2 }}" </th>
+                    <th>start price: </th>
+                    <th> {{ biddings.start_price }} USD</th>
+                    <th>actual price: </th>
+                    <th> {{ biddings.actual_price }} USD </th>
                 </tr>
             </table>
             <br/>
-
-            <a href=/estate/selected/{{ forloop.counter }} id="link">Details</a>
-
-
         </div>
         {% endfor %}
     </section>
