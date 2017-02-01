@@ -86,6 +86,7 @@ WSGI_APPLICATION = 'AgileEstate.wsgi.application'
 
 if DEBUG:
     if TEST:
+	# lokalna baza danych do testow na komputerach domowych
         DATABASES = {
             'default': {
                 'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -97,6 +98,10 @@ if DEBUG:
             }
         }
     else:
+	"""
+	Baza danych na Heroku (produkcyjna), dane do logowanie moga ulec zmianie
+	aktulane dane mozna pozyskac ze strony internetowej Heroku w dziale Database Credentials
+	"""
         DATABASES = {
             'default': {
                 'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -106,18 +111,17 @@ if DEBUG:
                 'HOST': 'ec2-79-125-110-211.eu-west-1.compute.amazonaws.com',
                 'PORT': '5432',
             }
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'd5inup5oc0qn4v',
-            'USER': 'sfdtgchubvysqi',
-            'PASSWORD': 'zle haslo',
-            'HOST': 'ec2-79-125-110-211.eu-west-1.compute.amazonaws.com',
-            'PORT': '5432',
         }
-    }
+else:
+	# Update database configuration with $DATABASE_URL.
+	"""
+	Paramtry produkcyjnej bazy danych pobierane z i WYLACZNIE na Heroku
+	Przy pracy na swoim komputerze nalezy ustawic DEBUG = True i 
+	skorzystac z jednej z dwoch powyzszych baz danych za pomoca zmiennej TEST
+	"""	
+	import dj_database_url
+	db_from_env = dj_database_url.config(conn_max_age=500)
+	DATABASES['default'].update(db_from_env)
 
 
 # Password validation
@@ -160,7 +164,4 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
 
-# Update database configuration with $DATABASE_URL.
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+
