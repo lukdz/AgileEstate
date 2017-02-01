@@ -11,14 +11,8 @@ from .models import UserProfile
 # Create your views here.
 
 def index(request):
-    if not request.user.is_authenticated():
-        return render(request, 'main.html')
-    user = request.user
-    profile = UserProfile.objects.get(user=user)
-    estates = EstateModel.objects.filter(owner_key=profile)
-    return render(request, 'profile/user_profile.html', {"user":user,"profile":profile,"estates":estates})
-
-
+    return render(request, 'main.html')
+    
 def register(request):
     userForm = UserForm(request.POST or None)
     profileForm = UserProfileForm(request.POST or None)
@@ -54,7 +48,6 @@ def register(request):
 def logout_user(request):
     logout(request)
     return render(request, 'main.html')
-
 
 def login_user(request):
     if request.method == "POST":
