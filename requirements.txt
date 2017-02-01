@@ -10,4 +10,4 @@ Pygments==2.1
 pytz==2014.10
 scipy==0.17.0
 sqlparse==0.1.18
-unity-lens-photos==1.0
+
