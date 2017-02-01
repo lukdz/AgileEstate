@@ -4,9 +4,11 @@
     <title>AgileEstate</title>
     <meta charset="utf-8">
     <style type="text/css">
+	@import url('https://fonts.googleapis.com/css?family=Lato');
         header {
             display: flex;
             flex-direction: row;
+            font-family: 'Lato', sans-serif;
         }
         
         #title {
@@ -15,6 +17,7 @@
             flex-grow: 4;
             color: white;
             background-color: black;
+	    
         }
         
         #login {
@@ -28,10 +31,12 @@
         body {
             margin: 0;
             background-color: #f2f2f2
+	    
         }
         
         section {
             max-width: 900px;
+            font-family: 'Lato', sans-serif;
         }
         
         #estate {
@@ -70,6 +75,7 @@
                 <a href={% url 'estate:estate_all' %} id="link">View property</a>
                 <a href={% url 'estate:estate_new' %} id="link">Add property</a>
             </div>
+	    <br>
             <div id="auctionlinks">
                 <a href={% url 'auction:bidding_all' %} id="link">View auctions</a>
                 <a href={% url 'auction:bidding_new' %} id="link">Add bidding</a>
