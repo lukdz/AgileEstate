@@ -25,14 +25,17 @@
 <h1>My Estates</h1>
 
 <table class='table'>
-  <tr>
-    <th>Country</th>
-    <th>Rooms</th>
+    <th>Latitude</th>
+    <th>Longitude</th>
+    <th>Surface</th>
+    <th>Window view</th>
   <tr>
   {% for estate in estates%}
   <tr>
-    <td> estate.country </td>
-    <td> estate.rooms </td>
+    <td> {{estate.get_latitude}} </td>
+    <td> {{estate.get_longitude}} </td>
+    <td> {{estate.surface}} </td>
+    <td> {{estate.get_window_view_name}} </td>
   </tr>
   {% endfor %}
 </table>

@@ -12,8 +12,11 @@ from .models import UserProfile
 
 def index(request):
     if not request.user.is_authenticated():
-        return render(request, 'profile/base.html')
-    return render(request, 'profile/index.html')
+        return render(request, 'main.html')
+    user = request.user
+    profile = UserProfile.objects.get(user=user)
+    estates = EstateModel.objects.filter(owner_key=profile)
+    return render(request, 'profile/user_profile.html', {"user":user,"profile":profile,"estates":estates})
 
 
 def register(request):
