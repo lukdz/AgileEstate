@@ -5,7 +5,7 @@ from .forms import BiddingForm
 from .models import BiddingModel
 from estate.models import EstateModel
 
-#@login_required(login_url='users:login_user')
+@login_required(login_url='users:login_user')
 def bidding_new(request):
     if request.method == 'POST':
         form = BiddingForm(request.user, request.POST)
